@@ -1,5 +1,28 @@
-.quick-action-list{
-    &-title{
-        font-size: 12px;
+.quick-action-list {
+    margin-top: 0.5rem;
+
+    &-item {
+        padding: 0.5rem 0.5rem;
+        border-radius: 8px;
+        transition: 0.3s background ease;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &:hover {
+            background: #282828;
+        }
+
+        &-title {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        &-role{
+            font-size: 9px;
+            text-transform: capitalize;
+            color: #a0a0a0;
+        }
     }
 }
