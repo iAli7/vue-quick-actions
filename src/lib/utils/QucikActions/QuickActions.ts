@@ -1,10 +1,13 @@
 import { reactive } from 'vue';
 
-interface ShortcutItem {
+export interface ShortcutItem {
   name: string;
+  icon?: any | null;
+  role: 'application' | 'command';
+  handleFunction: () => void;
 }
 
-interface ShortcutItems {
+export interface ShortcutItems {
   items: ShortcutItem[];
 }
 
