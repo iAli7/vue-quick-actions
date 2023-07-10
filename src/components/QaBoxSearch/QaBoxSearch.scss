@@ -1,0 +1,16 @@
+.quick-action-search {
+    width: 100%;
+    border-bottom: 1px solid #343434;
+    height: 100%;
+
+    &-input {
+        border: 0;
+        outline: 0;
+        font-size: 12px;
+        height: 40px;
+        width: calc(100% - .5rem);
+        padding: 0 .5rem;
+        color: #ededed;
+        background: transparent;
+    }
+}
