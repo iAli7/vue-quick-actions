@@ -1,22 +1,22 @@
 import { reactive } from 'vue';
 
-export interface ShortcutItem {
+export interface shortcutItem {
   name: string;
   icon?: any | null;
   role: 'application' | 'command';
-  handleFunction: () => void;
+  onSelect: () => void;
 }
 
 export interface ShortcutItems {
-  items: ShortcutItem[];
+  items: shortcutItem[];
 }
 
 const shortCutItems = reactive<ShortcutItems>({
   items: [],
 });
 
-export function QuickActions() {
-  const setShortcutItems = (array: ShortcutItem[]) => {
+export function useQuickActions() {
+  const setShortcutItems = (array: shortcutItem[]) => {
     shortCutItems.items.push(...array);
   };
 

@@ -6,12 +6,12 @@
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import {QaSearch} from "../../lib/utils/QaSearch"
+import {handleQaSearch} from "../../lib/utils/handleQaSearch"
 
 const searchValue = ref("")
 
 watch(searchValue, () =>{
-    QaSearch(searchValue)
+    handleQaSearch(searchValue)
 })
 </script>
 

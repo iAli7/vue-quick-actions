@@ -1,6 +1,6 @@
 <template>
   <div class="quick-action-list" v-for="(item, index) in QaList" :key="index">
-    <div class="quick-action-list-item" @click="item.handleFunction()">
+    <div class="quick-action-list-item" @click="item.onSelect()">
       <div class="quick-action-list-item-title">
         {{ item.name }}
       </div>
@@ -13,67 +13,30 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { QuickActions, ShortcutItem } from '../../lib/utils/QuickActions/QuickActions';
+import { useQuickActions, shortcutItem } from '../../lib/utils/useQuickAction/useQuickAction';
 
+const QaList = ref<shortcutItem[]>([]);
 
-const quickActions = QuickActions();
-const QaList = ref<ShortcutItem[]>([]);
-
-const variables: ShortcutItem[] = [
+const variables: shortcutItem[] = [
   {
-    name: 'Test',
+    name: 'Figma',
     role: 'application',
-    handleFunction: () => {
+    onSelect: () => {
       console.log('test');
     },
   },
   {
-    name: 'as etet',
+    name: 'YouTube',
     role: 'application',
-    handleFunction: () => {
-      console.log('test');
-    },
-  },
-  {
-    name: 'basdasa',
-    role: 'application',
-    handleFunction: () => {
-      console.log('test');
-    },
-  },
-  {
-    name: 'qweqweqw',
-    role: 'application',
-    handleFunction: () => {
-      console.log('test');
-    },
-  },
-  {
-    name: 'tetete',
-    role: 'application',
-    handleFunction: () => {
-      console.log('test');
-    },
-  },
-  {
-    name: 'asdasd',
-    role: 'application',
-    handleFunction: () => {
-      console.log('test');
-    },
-  },
-  {
-    name: 'dgdsgsdg',
-    role: 'application',
-    handleFunction: () => {
+    onSelect: () => {
       console.log('test');
     },
   },
 ];
 
 onMounted(() => {
-  quickActions.setShortcutItems(variables);
-  QaList.value = quickActions.shortCutItems.items;
+  useQuickActions().setShortcutItems(variables);
+  QaList.value = useQuickActions().shortCutItems.items;
 });
 </script>
   

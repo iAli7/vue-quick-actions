@@ -1,1 +1,1 @@
-export { QuickActions } from './utils/QuickActions/QuickActions';
+export { useQuickActions } from './utils/useQuickActions/useQuickActions';

@@ -9,9 +9,10 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        background: rgb(30, 30, 30);
 
         &:hover {
-            background: #282828;
+            background: #181717;
         }
 
         &-title {
