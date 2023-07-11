@@ -29,8 +29,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue';
-import { useQuickActions, shortcutItem } from '../../lib/utils/useQuickAction/useQuickAction';
-import { handleQaSearch } from '../../lib/utils/QaSearch';
+import { useQuickActions, shortcutItem } from '../../utils/useQuickAction/useQuickAction';
+import { handleQaSearch } from '../../utils/QaSearch';
 
 const searchValue = ref("")
 const focusItem = ref(0)
