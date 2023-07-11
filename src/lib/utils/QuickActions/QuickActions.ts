@@ -20,8 +20,6 @@ export function QuickActions() {
     shortCutItems.items.push(...array);
   };
 
-  console.log(shortCutItems.items);
-
   return {
     setShortcutItems,
     shortCutItems,
