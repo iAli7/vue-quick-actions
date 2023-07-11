@@ -18,6 +18,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
+const showChildren = ref(false)
+
 const { item, focus } = defineProps({
     item: {
         type: Object,
@@ -25,6 +27,4 @@ const { item, focus } = defineProps({
     },
     focus: Boolean
 });
-
-const showChildren = ref(false)
 </script>

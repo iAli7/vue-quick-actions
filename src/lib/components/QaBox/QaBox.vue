@@ -8,14 +8,18 @@
             <div class="quick-action-content-top">
                 <div class="quick-action-content-title">Suggestions</div>
                 <div class="quick-action-content-keys">
-                    <div class="quick-action-content-keys-item"><svg width="6" height="4" viewBox="0 0 6 4" fill="none"
-                            xmlns="http://www.w3.org/2000/svg" q:key="NT_0">
+                    <div class="quick-action-content-keys-item">
+                        <svg width="6" height="4" viewBox="0 0 6 4" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            q:key="NT_0">
                             <path d="M3 0L6 4H0L3 0Z" fill="white"></path>
-                        </svg></div>
-                    <div class="quick-action-content-keys-item"><svg width="6" height="4" viewBox="0 0 6 4" fill="none"
-                            xmlns="http://www.w3.org/2000/svg" q:key="5y_0">
+                        </svg>
+                    </div>
+                    <div class="quick-action-content-keys-item">
+                        <svg width="6" height="4" viewBox="0 0 6 4" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            q:key="5y_0">
                             <path d="M3 4L0 0L6 5.24537e-07L3 4Z" fill="white"></path>
-                        </svg></div>
+                        </svg>
+                    </div>
                 </div>
             </div>
             <div class="quick-action-list">
@@ -43,7 +47,7 @@ const originalQaList: shortcutItem[] = [
         onSelect: () => {
             console.log('test');
         },
-        
+
         children: [
             {
                 name: 'Figma Child 1',
@@ -105,7 +109,7 @@ onMounted(() => {
 });
 </script>
 
-<style src="./QaBox.scss" lang="scss"/>
+<style src="./QaBox.scss" lang="scss" />
 <style src="../../../assets/styles/QaBox/QaList.scss" lang="scss"/>
 <style src="../../../assets/styles/QaBox/QaContent.scss" lang="scss"/>
 <style src="../../../assets/styles/QaBox/QaSearch.scss" lang="scss"/>
