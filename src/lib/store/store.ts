@@ -1,12 +1,14 @@
+import { Component } from "vue";
+
 export interface shortcutItem {
-    name: string;
-    icon?: any | null;
-    role: 'application' | 'command' | 'group';
-    tag?: string | null;
-    onSelect: () => void;
-    children?: shortcutItem[] 
-  }
-  
-  export interface ShortcutItems {
-    items: shortcutItem[];
-  }
+  name: string;
+  icon?: Component;
+  role: 'application' | 'command' | 'group';
+  tag?: string | null;
+  onSelect: () => void;
+  children?: shortcutItem[]
+}
+
+export interface ShortcutItems {
+  items: shortcutItem[];
+}

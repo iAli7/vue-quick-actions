@@ -8,11 +8,6 @@
             {{ item?.role }}
         </div>
     </div>
-    <div v-if="item?.children && showChildren">
-        <QaListItem v-for="(childItem, index) in item.children" :key="index" :item="childItem" @focus="$emit('focus')"
-            @select="childItem.onSelect">
-        </QaListItem>
-    </div>
 </template>
 
 <script setup lang="ts">

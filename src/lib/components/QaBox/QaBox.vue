@@ -23,15 +23,15 @@
                 </div>
             </div>
             <div class="quick-action-list">
-                <QuickActionItem v-for="(item, index) in QaList" :key="index" :item="item" :focus="focusItem === index"
-                    @focus="focusItem = index" @select="item.onSelect"></QuickActionItem>
+                <QuickActionItem v-for="(item, index) in itemsToRender" :key="index" :item="item"
+                    :focus="focusItem === index" @focus="focusItem = index" @select="handleSelect(item)"></QuickActionItem>
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, computed } from 'vue';
 import QuickActionItem from '../QaListItem/QaListItem.vue';
 import { handleQaSearch } from '../../utils/QaSearch';
 import { shortcutItem } from '../../store/store';
@@ -55,6 +55,13 @@ const originalQaList: shortcutItem[] = [
                 onSelect: () => {
                     console.log('test child');
                 },
+                children: [
+                    {
+                        name: 'cocugumun cocugu',
+                        role: 'application',
+                        onSelect: () => { }
+                    }
+                ]
             },
             {
                 name: 'Figma Child 2',
@@ -107,6 +114,34 @@ onMounted(() => {
         }
     });
 });
+
+const activeParentPath = ref<shortcutItem[]>([]);
+
+const itemsToRender = computed(() => {
+    if (activeParentPath.value.length > 0) {
+        return activeParentPath.value[activeParentPath.value.length - 1].children;
+    } else {
+        return originalQaList;
+    }
+})
+
+const handleSelect = (item: shortcutItem) => {
+    if (originalQaList.includes(item)) {
+        activeParentPath.value = [];
+    }
+
+    if (item.children) {
+        activeParentPath.value.push(item);
+    }
+
+    item.onSelect();
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Backspace') {
+        activeParentPath.value.pop();
+    }
+})
 </script>
 
 <style src="./QaBox.scss" lang="scss" />
