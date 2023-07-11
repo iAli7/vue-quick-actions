@@ -5,9 +5,15 @@
                 class="quick-action-search-input" type="text">
         </div>
         <div class="quick-action-content">
-            <div class="quick-action-content-title">Suggestions</div>
-            <div class="quick-action-list" v-for="(item, index) in QaList" :key="index">
-                <div class="quick-action-list-item" @click="item.onSelect()">
+            <div class="quick-action-content-top">
+                <div class="quick-action-content-title">Suggestions</div>
+                <div class="quick-action-content-keys">
+                    <div class="quick-action-content-keys-item"><svg width="6" height="4" viewBox="0 0 6 4" fill="none" xmlns="http://www.w3.org/2000/svg" q:key="NT_0"><path d="M3 0L6 4H0L3 0Z" fill="white"></path></svg></div>
+                    <div class="quick-action-content-keys-item"><svg width="6" height="4" viewBox="0 0 6 4" fill="none" xmlns="http://www.w3.org/2000/svg" q:key="5y_0"><path d="M3 4L0 0L6 5.24537e-07L3 4Z" fill="white"></path></svg></div>
+                </div>
+            </div>
+            <div class="quick-action-list">
+                <div class="quick-action-list-item" @click="item.onSelect()" :class="{ 'quick-action-list-item-focused': index === focusItem }" v-for="(item, index) in QaList" :key="index">
                     <div class="quick-action-list-item-title">
                         {{ item.name }}
                     </div>
@@ -15,6 +21,7 @@
                         {{ item.role }}
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -26,6 +33,8 @@ import { useQuickActions, shortcutItem } from '../../lib/utils/useQuickAction/us
 import { handleQaSearch } from '../../lib/utils/QaSearch';
 
 const searchValue = ref("")
+const focusItem = ref(0)
+
 const QaList = ref<shortcutItem[]>([]);
 const variables: shortcutItem[] = [
     {
@@ -42,6 +51,20 @@ const variables: shortcutItem[] = [
             console.log('test');
         },
     },
+    {
+        name: 'Twitter',
+        role: 'application',
+        onSelect: () => {
+            console.log('test');
+        },
+    },
+    {
+        name: 'Instagram',
+        role: 'application',
+        onSelect: () => {
+            console.log('test');
+        },
+    },
 ];
 
 watch(searchValue, () =>{
@@ -51,6 +74,20 @@ watch(searchValue, () =>{
 onMounted(() => {
     useQuickActions().setShortcutItems(variables);
     QaList.value = useQuickActions().shortCutItems.items;
+
+    window.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowDown") {
+            if (focusItem.value < QaList.value.length - 1) {
+                focusItem.value++;
+            }
+        } else if (event.key === "ArrowUp") {
+            if (focusItem.value > 0) {
+                focusItem.value--;
+            }
+        } else if (event.key === "Enter") {
+            QaList.value[focusItem.value].onSelect();
+        }
+    });
 });
 
 </script>
