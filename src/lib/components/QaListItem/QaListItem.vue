@@ -1,6 +1,6 @@
 <template>
-    <div class="quick-action-list-item" @click="$emit('select'), showChildren = !showChildren" :class="{ 'quick-action-list-item-focused': focus }"
-        @mouseenter="$emit('focus')">
+    <div class="quick-action-list-item" @click="$emit('select'), showChildren = !showChildren"
+        :class="{ 'quick-action-list-item-focused': focus }" @mouseenter="$emit('focus')">
         <div class="quick-action-list-item-title">
             {{ item?.name }}
         </div>

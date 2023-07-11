@@ -30,7 +30,7 @@
 import { ref, onMounted, watch } from 'vue';
 import QuickActionItem from '../QaListItem/QaListItem.vue';
 import { handleQaSearch } from '../../utils/QaSearch';
-import { shortcutItem } from '../../utils/useQuickAction/useQuickAction';
+import { shortcutItem } from '../../store/store';
 
 const searchValue = ref("")
 const focusItem = ref(0)
@@ -38,7 +38,7 @@ const focusItem = ref(0)
 const originalQaList: shortcutItem[] = [
     {
         name: 'Figma',
-        role: 'application',
+        role: 'group',
         tag: 'design',
         onSelect: () => {
             console.log('test');
@@ -52,10 +52,24 @@ const originalQaList: shortcutItem[] = [
                     console.log('test child');
                 },
             },
+            {
+                name: 'Figma Child 2',
+                role: 'application',
+                onSelect: () => {
+                    console.log('test child');
+                },
+            },
+            {
+                name: 'Figma Child 3',
+                role: 'application',
+                onSelect: () => {
+                    console.log('test child');
+                },
+            },
         ],
     },
     {
-        name: 'Figma',
+        name: 'AdobeXD',
         role: 'application',
         tag: 'design',
         onSelect: () => {
@@ -70,7 +84,7 @@ watch(searchValue, () => {
     if (searchValue.value === "") {
         QaList.value = [...originalQaList];
     } else {
-        QaList.value = handleQaSearch(searchValue);
+        QaList.value = handleQaSearch(searchValue, QaList.value);
     }
 })
 
@@ -92,6 +106,6 @@ onMounted(() => {
 </script>
 
 <style src="./QaBox.scss" lang="scss"/>
-<style src="../QaListItem/QaBoxList.scss" lang="scss"/>
-<style src="../QaBoxSearch/QaBoxSearch.scss" lang="scss"/>
-<style src="../QaBoxContent/QaBoxContent.scss" lang="scss"/>
+<style src="../../../assets/styles/QaBox/QaList.scss" lang="scss"/>
+<style src="../../../assets/styles/QaBox/QaContent.scss" lang="scss"/>
+<style src="../../../assets/styles/QaBox/QaSearch.scss" lang="scss"/>

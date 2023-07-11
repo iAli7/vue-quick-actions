@@ -1,12 +1,11 @@
 import { Ref } from "vue";
-import { useQuickActions } from "./useQuickAction/useQuickAction";
+import { shortcutItem } from "../store/store";
 
-export const handleQaSearch = (searchValue: Ref<string>) => {
-    const items = useQuickActions().shortCutItems.items;
+export const handleQaSearch = (searchValue: Ref<string>, Array: shortcutItem[]) => {
     const lowerSearchValue = searchValue.value.toLowerCase();
 
-    const searchResults = items.filter((item: { name: string; }) => 
-        item.name.toLowerCase().includes(lowerSearchValue)
+    const searchResults = Array.filter((item: { name: string; }) => 
+    item.name.toLowerCase().includes(lowerSearchValue)
     );
 
     console.log(searchResults)
