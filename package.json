@@ -9,12 +9,32 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "eslint-config-google": "^0.14.0",
     "sass": "^1.63.6",
     "vue": "^3.3.4"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
     "@vitejs/plugin-vue": "^4.2.3",
-    "typescript": "^5.0.2",
+    "@vue/compiler-sfc": "^3.2.47",
+    "@vue/eslint-config-typescript": "^10.0.0",
+    "@vueuse/core": "^8.9.4",
+    "autoprefixer": "^10.4.14",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-airbnb-typescript": "^16.2.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jest": "^27.2.2",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "eslint-plugin-vue": "^9.14.1",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.5.0",
+    "stylelint": "^14.16.1",
+    "stylelint-config-sass-guidelines": "^8.0.0",
+    "typescript": "^5.0.4",
     "vite": "^4.4.0",
     "vue-tsc": "^1.8.3"
   }
