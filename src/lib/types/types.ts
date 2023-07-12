@@ -1,7 +1,7 @@
-import { Component } from "vue";
+import { Component } from 'vue';
 
 export interface shortcutItem {
-  name: string;
+  label: string;
   icon?: Component;
   role: 'application' | 'command' | 'group';
   tag?: string | null;

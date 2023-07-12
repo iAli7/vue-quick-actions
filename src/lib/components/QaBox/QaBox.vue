@@ -59,6 +59,25 @@
         />
       </div>
     </div>
+    <div class="quick-action-bottom">
+      <div class="quick-action-badge">
+        <span
+          v-for="(item, index) in activeParentPath"
+          :key="index"
+          class="quick-action-badge-item"
+        >
+          {{ item.label + (index < activeParentPath.length - 1 ? ' -> ' : '') }}
+        </span>
+      </div>
+      <div class="quick-action-content-keys">
+        <div class="quick-action-content-keys-item">
+          ESC
+        </div>
+        <div class="quick-action-content-keys-item">
+          Enter
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -67,15 +86,19 @@ import {
   ref, onMounted, watch, computed,
 } from 'vue';
 
-import { shortcutItem } from '../../store/store';
-import { handleQaSearch } from '../../utils/QaSearch';
+import { shortcutItem } from '../../types/types';
+
+import { handleQaSearch } from './search';
+
+// eslint-disable-next-line
+import QuickActionItem from '../QaListItem/QaListItem.vue';
 
 const searchValue = ref('');
 const focusItem = ref(0);
 
 const originalQaList: shortcutItem[] = [
   {
-    name: 'Figma',
+    label: 'Figma',
     role: 'group',
     tag: 'design',
     onSelect: () => {
@@ -84,28 +107,28 @@ const originalQaList: shortcutItem[] = [
 
     children: [
       {
-        name: 'Figma Child 1',
+        label: 'Figma Child 1',
         role: 'application',
         onSelect: () => {
           console.log('test child');
         },
         children: [
           {
-            name: 'cocugumun cocugu',
+            label: 'cocugumun cocugu',
             role: 'application',
             onSelect: () => { },
           },
         ],
       },
       {
-        name: 'Figma Child 2',
+        label: 'Figma Child 2',
         role: 'application',
         onSelect: () => {
           console.log('test child');
         },
       },
       {
-        name: 'Figma Child 3',
+        label: 'Figma Child 3',
         role: 'application',
         onSelect: () => {
           console.log('test child');
@@ -114,7 +137,7 @@ const originalQaList: shortcutItem[] = [
     ],
   },
   {
-    name: 'AdobeXD',
+    label: 'AdobeXD',
     role: 'application',
     tag: 'design',
     onSelect: () => {
@@ -122,6 +145,7 @@ const originalQaList: shortcutItem[] = [
     },
   },
 ];
+const activeParentPath = ref<shortcutItem[]>([]);
 
 const QaList = ref<shortcutItem[]>([...originalQaList]);
 
@@ -129,7 +153,7 @@ watch(searchValue, () => {
   if (searchValue.value === '') {
     QaList.value = [...originalQaList];
   } else {
-    QaList.value = handleQaSearch(searchValue, QaList.value);
+    QaList.value = handleQaSearch(searchValue.value, originalQaList);
   }
 });
 
@@ -149,14 +173,12 @@ onMounted(() => {
   });
 });
 
-const activeParentPath = ref<shortcutItem[]>([]);
-
 const itemsToRender = computed(() => {
   if (activeParentPath.value.length > 0) {
     return activeParentPath.value[activeParentPath.value.length - 1].children;
   }
 
-  return originalQaList;
+  return QaList.value;
 });
 
 const handleSelect = (item: shortcutItem) => {
@@ -166,14 +188,16 @@ const handleSelect = (item: shortcutItem) => {
 
   if (item.children) {
     activeParentPath.value.push(item);
+    focusItem.value = 0;
   }
 
   item.onSelect();
 };
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Backspace') {
+  if (e.key === 'Escape') {
     activeParentPath.value.pop();
+    focusItem.value = 0;
   }
 });
 </script>
@@ -182,3 +206,4 @@ document.addEventListener('keydown', (e) => {
 <style src="../../../assets/styles/QaBox/QaList.scss" lang="scss" />
 <style src="../../../assets/styles/QaBox/QaContent.scss" lang="scss" />
 <style src="../../../assets/styles/QaBox/QaSearch.scss" lang="scss" />
+./qaSearch
