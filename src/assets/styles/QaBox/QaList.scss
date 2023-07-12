@@ -1,5 +1,15 @@
 .quick-action-list {
-    margin-top: 0.5rem;
+    &-separator{
+        font-size: 9px;
+        font-weight: 400;
+        margin-left: .25rem;
+        color: #a0a0a0;
+        margin-top: 1rem;
+
+        &:first-child{
+            margin-top: 0;
+        }
+}
 
     &-item {
         padding: 0.5rem 0.5rem;

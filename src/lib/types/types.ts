@@ -5,6 +5,8 @@ export interface shortcutItem {
   icon?: Component;
   role: 'application' | 'command' | 'group';
   tag?: string | null;
+  separator?: boolean;
+  separatorLabel?: string;
   onSelect: () => void;
   children?: shortcutItem[]
 }

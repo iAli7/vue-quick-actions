@@ -12,5 +12,9 @@
         padding: 0 .5rem;
         color: #ededed;
         background: transparent;
+
+        &::placeholder{
+            font-size: 10px;
+        }
     }
 }

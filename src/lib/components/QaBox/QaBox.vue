@@ -10,9 +10,34 @@
       >
     </div>
     <div class="quick-action-content">
-      <div class="quick-action-content-top">
-        <div class="quick-action-content-title">
-          Suggestions
+      <div class="quick-action-list">
+        <QuickActionItem
+          v-for="
+            (item, index) in itemsToRender"
+          :key="index"
+          :item="item"
+          :focus="focusItem === index"
+          @focus="focusItem = index"
+          @select="handleSelect(item)"
+        />
+      </div>
+    </div>
+    <div class="quick-action-bottom">
+      <div class="quick-action-badge">
+        <span
+          v-for="(item, index) in activeParentPath"
+          :key="index"
+          class="quick-action-badge-item"
+        >
+          {{ item.label + (index < activeParentPath.length - 1 ? ' -> ' : '') }}
+        </span>
+      </div>
+      <div class="quick-action-content-keys">
+        <div class="quick-action-content-keys-item">
+          ESC
+        </div>
+        <div class="quick-action-content-keys-item">
+          Enter
         </div>
         <div class="quick-action-content-keys">
           <div class="quick-action-content-keys-item">
@@ -47,36 +72,6 @@
           </div>
         </div>
       </div>
-      <div class="quick-action-list">
-        <QuickActionItem
-          v-for="
-            (item, index) in itemsToRender"
-          :key="index"
-          :item="item"
-          :focus="focusItem === index"
-          @focus="focusItem = index"
-          @select="handleSelect(item)"
-        />
-      </div>
-    </div>
-    <div class="quick-action-bottom">
-      <div class="quick-action-badge">
-        <span
-          v-for="(item, index) in activeParentPath"
-          :key="index"
-          class="quick-action-badge-item"
-        >
-          {{ item.label + (index < activeParentPath.length - 1 ? ' -> ' : '') }}
-        </span>
-      </div>
-      <div class="quick-action-content-keys">
-        <div class="quick-action-content-keys-item">
-          ESC
-        </div>
-        <div class="quick-action-content-keys-item">
-          Enter
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -99,6 +94,8 @@ const focusItem = ref(0);
 const originalQaList: shortcutItem[] = [
   {
     label: 'Figma',
+    separator: true,
+    separatorLabel: 'Suggestions',
     role: 'group',
     tag: 'design',
     onSelect: () => {
@@ -135,6 +132,32 @@ const originalQaList: shortcutItem[] = [
         },
       },
     ],
+  },
+  {
+    label: 'AdobeXD',
+    role: 'application',
+    separator: true,
+    separatorLabel: 'TEST',
+    tag: 'design',
+    onSelect: () => {
+      console.log('test');
+    },
+  },
+  {
+    label: 'AdobeXD',
+    role: 'application',
+    tag: 'design',
+    onSelect: () => {
+      console.log('test');
+    },
+  },
+  {
+    label: 'AdobeXD',
+    role: 'application',
+    tag: 'design',
+    onSelect: () => {
+      console.log('test');
+    },
   },
   {
     label: 'AdobeXD',
