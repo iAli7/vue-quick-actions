@@ -2,6 +2,7 @@
     width: 100%;
     border-bottom: 1px solid #343434;
     height: 100%;
+    position: relative;
 
     &-input {
         border: 0;
@@ -16,5 +17,27 @@
         &::placeholder{
             font-size: 10px;
         }
+    }
+
+    &-loading{
+        background: #fff;
+        height: 2px;
+        position: absolute;
+        bottom: 0;
+        width: 25%;
+        left: 0;
+        animation: loadAnimation 2s infinite;
+    }
+}
+
+@keyframes loadAnimation {
+    0%{
+        transform: translateX(0);
+    }
+    70%,90%{
+        transform: translateX(300%);
+    }
+    100%{
+        transform: translateX(0);
     }
 }

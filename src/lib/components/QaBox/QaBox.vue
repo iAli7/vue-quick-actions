@@ -8,6 +8,10 @@
         class="quick-action-search-input"
         type="text"
       >
+      <div
+        v-if="isLoading"
+        class="quick-action-search-loading"
+      />
     </div>
     <div class="quick-action-content">
       <div class="quick-action-list">
@@ -89,10 +93,21 @@ import { handleQaSearch } from './search';
 // eslint-disable-next-line
 import QuickActionItem from '../QaListItem/QaListItem.vue';
 
+interface Props{
+  function: Function;
+}
+
+const userProvidedFunction = defineProps<Props>();
+
+const emit = defineEmits<{
+  searchChange: any
+}>();
+
 const searchValue = ref('');
 const focusItem = ref(0);
+const isLoading = ref(false);
 
-const originalQaList: shortcutItem[] = [
+const originalQaList = ref<shortcutItem[]>([
   {
     label: 'Figma',
     separator: true,
@@ -162,17 +177,31 @@ const originalQaList: shortcutItem[] = [
       console.log('test');
     },
   },
-];
+]);
 const activeParentPath = ref<shortcutItem[]>([]);
 
-const qaList = ref<shortcutItem[]>([...originalQaList]);
+const qaList = ref<shortcutItem[]>([...originalQaList.value]);
+
+const executeUserFunction = async () => {
+  isLoading.value = true;
+  try {
+    await userProvidedFunction.function();
+  } catch (error) {
+    console.error('Error executing user function:', error);
+  } finally {
+    isLoading.value = false;
+  }
+};
 
 watch(searchValue, () => {
   if (searchValue.value === '') {
-    qaList.value = [...originalQaList];
+    qaList.value = [...originalQaList.value];
   } else {
-    qaList.value = handleQaSearch(searchValue.value, originalQaList);
+    qaList.value = handleQaSearch(searchValue.value, originalQaList.value);
+    executeUserFunction();
   }
+
+  emit('searchChange', searchValue.value);
 });
 
 onMounted(() => {
@@ -206,7 +235,7 @@ const itemsToRender = computed(() => {
 });
 
 const handleSelect = (item: shortcutItem) => {
-  if (originalQaList.includes(item)) {
+  if (originalQaList.value.includes(item)) {
     activeParentPath.value = [];
   }
 
