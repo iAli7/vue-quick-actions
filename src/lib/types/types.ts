@@ -1,11 +1,10 @@
 export interface shortcutItem {
   label: string;
   icon?: Object;
-  role: 'application' | 'command' | 'group';
+  role?: string;
   tag?: string | null;
   separator?: boolean;
-  separatorLabel?: string;
-  onSelect: () => void;
+  onSelect?: () => void;
   children?: shortcutItem[]
 }
 

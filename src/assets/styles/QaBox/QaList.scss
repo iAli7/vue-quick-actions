@@ -1,13 +1,12 @@
 .quick-action-list {
     &-separator{
-        font-size: 9px;
+        font-size: 10px;
         font-weight: 400;
-        margin-left: .25rem;
+        padding: 5px;
         color: #a0a0a0;
-        margin-top: 1rem;
 
         &:first-child{
-            margin-top: 0;
+            padding-top: 0;
         }
 }
 

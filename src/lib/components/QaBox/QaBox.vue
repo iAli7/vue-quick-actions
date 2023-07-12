@@ -97,7 +97,6 @@ const originalQaList: shortcutItem[] = [
     label: 'Figma',
     separator: true,
     icon: figmaLogo,
-    separatorLabel: 'Suggestions',
     role: 'group',
     tag: 'design',
     onSelect: () => {
@@ -113,7 +112,7 @@ const originalQaList: shortcutItem[] = [
         },
         children: [
           {
-            label: 'cocugumun cocugu',
+            label: 'Figma Child 1 Child',
             role: 'application',
             onSelect: () => { },
           },
@@ -137,13 +136,7 @@ const originalQaList: shortcutItem[] = [
   },
   {
     label: 'AdobeXD',
-    role: 'application',
     separator: true,
-    separatorLabel: 'TEST',
-    tag: 'design',
-    onSelect: () => {
-      console.log('test');
-    },
   },
   {
     label: 'AdobeXD',
@@ -172,20 +165,20 @@ const originalQaList: shortcutItem[] = [
 ];
 const activeParentPath = ref<shortcutItem[]>([]);
 
-const QaList = ref<shortcutItem[]>([...originalQaList]);
+const qaList = ref<shortcutItem[]>([...originalQaList]);
 
 watch(searchValue, () => {
   if (searchValue.value === '') {
-    QaList.value = [...originalQaList];
+    qaList.value = [...originalQaList];
   } else {
-    QaList.value = handleQaSearch(searchValue.value, originalQaList);
+    qaList.value = handleQaSearch(searchValue.value, originalQaList);
   }
 });
 
 onMounted(() => {
   window.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowDown') {
-      if (focusItem.value < QaList.value.length - 1) {
+      if (focusItem.value < qaList.value.length - 1) {
         focusItem.value += 1;
       }
     } else if (event.key === 'ArrowUp') {
@@ -193,7 +186,10 @@ onMounted(() => {
         focusItem.value -= 1;
       }
     } else if (event.key === 'Enter') {
-      QaList.value[focusItem.value].onSelect();
+      const currentItem = qaList.value[focusItem.value];
+      if (currentItem && typeof currentItem.onSelect === 'function') {
+        currentItem.onSelect();
+      }
     } else if (event.key === 'Escape') {
       activeParentPath.value.pop();
       focusItem.value = 0;
@@ -206,7 +202,7 @@ const itemsToRender = computed(() => {
     return activeParentPath.value[activeParentPath.value.length - 1].children;
   }
 
-  return QaList.value;
+  return qaList.value;
 });
 
 const handleSelect = (item: shortcutItem) => {
@@ -219,12 +215,10 @@ const handleSelect = (item: shortcutItem) => {
     focusItem.value = 0;
   }
 
-  item.onSelect();
+  if (item.onSelect) {
+    item.onSelect();
+  }
 };
 </script>
 
 <style src="./QaBox.scss" lang="scss" />
-<style src="../../../assets/styles/QaBox/QaList.scss" lang="scss" />
-<style src="../../../assets/styles/QaBox/QaContent.scss" lang="scss" />
-<style src="../../../assets/styles/QaBox/QaSearch.scss" lang="scss" />
-./qaSearch

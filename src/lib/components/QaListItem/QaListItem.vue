@@ -3,7 +3,7 @@
     v-if="item.separator"
     class="quick-action-list-separator"
   >
-    {{ item.separatorLabel || '' }}
+    {{ item.label || '' }}
   </div>
   <div
     class="quick-action-list-item"
