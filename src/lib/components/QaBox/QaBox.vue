@@ -194,6 +194,9 @@ onMounted(() => {
       }
     } else if (event.key === 'Enter') {
       QaList.value[focusItem.value].onSelect();
+    } else if (event.key === 'Escape') {
+      activeParentPath.value.pop();
+      focusItem.value = 0;
     }
   });
 });
@@ -218,13 +221,6 @@ const handleSelect = (item: shortcutItem) => {
 
   item.onSelect();
 };
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    activeParentPath.value.pop();
-    focusItem.value = 0;
-  }
-});
 </script>
 
 <style src="./QaBox.scss" lang="scss" />
