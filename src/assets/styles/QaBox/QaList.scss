@@ -24,6 +24,21 @@
             background: #282828;
         }
 
+        &-left{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        &-icon{
+            display: flex;
+            align-items: center;
+
+            img{
+                height: 20px;
+                width: 20px;
+            }
+        }
         &-title {
             font-size: 12px;
             font-weight: 500;

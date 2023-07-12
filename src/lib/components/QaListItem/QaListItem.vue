@@ -11,8 +11,16 @@
     @click="$emit('select'), showChildren = !showChildren"
     @mouseenter="$emit('focus')"
   >
-    <div class="quick-action-list-item-title">
-      {{ item?.label }}
+    <div class="quick-action-list-item-left">
+      <div
+        v-if="item.icon"
+        class="quick-action-list-item-icon"
+      >
+        <img :src="item.icon">
+      </div>
+      <div class="quick-action-list-item-title">
+        {{ item?.label }}
+      </div>
     </div>
     <div class="quick-action-list-item-role">
       {{ item?.role }}

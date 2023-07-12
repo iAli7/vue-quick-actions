@@ -81,6 +81,7 @@ import {
   ref, onMounted, watch, computed,
 } from 'vue';
 
+import figmaLogo from '../../../assets/images/figma.png';
 import { shortcutItem } from '../../types/types';
 
 import { handleQaSearch } from './search';
@@ -95,6 +96,7 @@ const originalQaList: shortcutItem[] = [
   {
     label: 'Figma',
     separator: true,
+    icon: figmaLogo,
     separatorLabel: 'Suggestions',
     role: 'group',
     tag: 'design',
