@@ -117,7 +117,7 @@ const originalQaList = ref<shortcutItem[]>([
     separator: true,
     icon: figmaLogo,
     role: 'group',
-    tag: 'design',
+    alias: 'design',
     onSelect: () => {
       console.log('test');
     },
@@ -160,7 +160,7 @@ const originalQaList = ref<shortcutItem[]>([
   {
     label: 'AdobeXD',
     role: 'application',
-    tag: 'design',
+    alias: 'design',
     onSelect: () => {
       console.log('test');
     },
@@ -168,7 +168,7 @@ const originalQaList = ref<shortcutItem[]>([
   {
     label: 'AdobeXD',
     role: 'application',
-    tag: 'design',
+    alias: 'design',
     onSelect: () => {
       console.log('test');
     },
@@ -176,7 +176,7 @@ const originalQaList = ref<shortcutItem[]>([
   {
     label: 'AdobeXD',
     role: 'application',
-    tag: 'design',
+    alias: 'design',
     onSelect: () => {
       console.log('test');
     },
@@ -184,7 +184,7 @@ const originalQaList = ref<shortcutItem[]>([
   {
     label: 'AdobeXD',
     role: 'application',
-    tag: 'design',
+    alias: 'design',
     onSelect: () => {
       console.log('test');
     },
@@ -192,7 +192,7 @@ const originalQaList = ref<shortcutItem[]>([
   {
     label: 'AdobeXD',
     role: 'application',
-    tag: 'design',
+    alias: 'design',
     onSelect: () => {
       console.log('test');
     },
@@ -200,7 +200,7 @@ const originalQaList = ref<shortcutItem[]>([
   {
     label: 'AdobeXD',
     role: 'application',
-    tag: 'design',
+    alias: 'design',
     onSelect: () => {
       console.log('test');
     },
@@ -208,7 +208,7 @@ const originalQaList = ref<shortcutItem[]>([
   {
     label: 'AdobeXD',
     role: 'application',
-    tag: 'design',
+    alias: 'design',
     onSelect: () => {
       console.log('test');
     },
@@ -216,7 +216,7 @@ const originalQaList = ref<shortcutItem[]>([
   {
     label: 'AdobeXD',
     role: 'application',
-    tag: 'design',
+    alias: 'design',
     onSelect: () => {
       console.log('test');
     },
@@ -224,7 +224,7 @@ const originalQaList = ref<shortcutItem[]>([
   {
     label: 'AdobeXD',
     role: 'application',
-    tag: 'design',
+    alias: 'design',
     onSelect: () => {
       console.log('test');
     },
