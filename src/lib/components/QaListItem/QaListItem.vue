@@ -6,6 +6,7 @@
     {{ item.label || '' }}
   </div>
   <div
+    v-if="!item.separator"
     class="quick-action-list-item"
     :class="{ 'quick-action-list-item-focused': focus }"
     @click="$emit('select'), showChildren = !showChildren"

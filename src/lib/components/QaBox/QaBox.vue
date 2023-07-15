@@ -102,6 +102,7 @@ interface Props{
 }
 
 const userProvidedFunction = defineProps<Props>();
+const historyPath = ref<shortcutItem[]>([]);
 
 const emit = defineEmits<{
   searchChange: any
@@ -115,6 +116,9 @@ const originalQaList = ref<shortcutItem[]>([
   {
     label: 'Figma',
     separator: true,
+  },
+  {
+    label: 'Figma',
     icon: figmaLogo,
     role: 'group',
     alias: 'design',
@@ -230,6 +234,7 @@ const originalQaList = ref<shortcutItem[]>([
     },
   },
 ]);
+
 const activeParentPath = ref<shortcutItem[]>([]);
 
 const qaList = ref<shortcutItem[]>([...originalQaList.value]);
@@ -307,6 +312,8 @@ const handleSelect = (item: shortcutItem) => {
   if (item.onSelect) {
     item.onSelect();
   }
+
+  historyPath.value.push(item);
 };
 </script>
 
