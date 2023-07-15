@@ -9,35 +9,61 @@
         outline: 0;
         font-size: 12px;
         height: 40px;
-        width: calc(100% - .5rem);
-        padding: 0 .5rem;
+        width: calc(100% - 0.5rem);
+        padding: 0 0.5rem;
         color: #ededed;
         background: transparent;
 
-        &::placeholder{
+        &::placeholder {
             font-size: 10px;
         }
     }
 
-    &-loading{
+    &-loading {
         background: #fff;
-        height: 2px;
-        position: absolute;
-        bottom: 0;
+        height: 1px;
         width: 25%;
-        left: 0;
-        animation: loadAnimation 2s infinite;
+        animation: loadAnimation 3s infinite;
+
+        &-wrapper {
+            bottom: 0;
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            left: 0;
+            &::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                z-index: 10;
+                height: 100%;
+                background: linear-gradient(to right,
+                rgba(22, 22, 22, 0.673),
+                transparent,
+                rgba(22, 22, 22, 0.673))
+            }
+        }
     }
 }
 
 @keyframes loadAnimation {
-    0%{
+    0% {
         transform: translateX(0);
     }
-    70%,90%{
-        transform: translateX(300%);
+    70%,
+    90% {
+        transform: translateX(500%);
     }
-    100%{
+    95%{
+        opacity: 0;
+    }
+    98%{
+        transform: translateX(-100%)
+        opacity 1;
+    }
+    100% {
         transform: translateX(0);
     }
 }

@@ -10,8 +10,12 @@
       >
       <div
         v-if="isLoading"
-        class="quick-action-search-loading"
-      />
+        class="quick-action-search-loading-wrapper"
+      >
+        <div
+          class="quick-action-search-loading"
+        />
+      </div>
     </div>
     <div class="quick-action-content">
       <div class="quick-action-list">
@@ -177,6 +181,54 @@ const originalQaList = ref<shortcutItem[]>([
       console.log('test');
     },
   },
+  {
+    label: 'AdobeXD',
+    role: 'application',
+    tag: 'design',
+    onSelect: () => {
+      console.log('test');
+    },
+  },
+  {
+    label: 'AdobeXD',
+    role: 'application',
+    tag: 'design',
+    onSelect: () => {
+      console.log('test');
+    },
+  },
+  {
+    label: 'AdobeXD',
+    role: 'application',
+    tag: 'design',
+    onSelect: () => {
+      console.log('test');
+    },
+  },
+  {
+    label: 'AdobeXD',
+    role: 'application',
+    tag: 'design',
+    onSelect: () => {
+      console.log('test');
+    },
+  },
+  {
+    label: 'AdobeXD',
+    role: 'application',
+    tag: 'design',
+    onSelect: () => {
+      console.log('test');
+    },
+  },
+  {
+    label: 'AdobeXD',
+    role: 'application',
+    tag: 'design',
+    onSelect: () => {
+      console.log('test');
+    },
+  },
 ]);
 const activeParentPath = ref<shortcutItem[]>([]);
 
@@ -185,7 +237,14 @@ const qaList = ref<shortcutItem[]>([...originalQaList.value]);
 const executeUserFunction = async () => {
   isLoading.value = true;
   try {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     await userProvidedFunction.function();
+
+    if (!qaList.value.some((item) => item.label === 'hey')) {
+      qaList.value.push({
+        label: 'hey',
+      });
+    }
   } catch (error) {
     console.error('Error executing user function:', error);
   } finally {
@@ -197,7 +256,8 @@ watch(searchValue, () => {
   if (searchValue.value === '') {
     qaList.value = [...originalQaList.value];
   } else {
-    qaList.value = handleQaSearch(searchValue.value, originalQaList.value);
+    const searchResults = handleQaSearch(searchValue.value, originalQaList.value);
+    qaList.value = searchResults.filter((item) => !item.separator);
     executeUserFunction();
   }
 

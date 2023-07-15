@@ -6,9 +6,10 @@
 // eslint-disable-next-line
 import QaBox from "./lib/components/QaBox/QaBox.vue"
 
-function test() {
-  console.log('test Basarılı');
+function test(label: string) {
+  console.log(`Label: ${label}`);
 }
+
 </script>
 
 <style src="./assets/styles/base/body.scss" lang="scss" />
