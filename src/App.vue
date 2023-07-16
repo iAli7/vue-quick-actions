@@ -5,9 +5,14 @@
 <script setup lang="ts">
 // eslint-disable-next-line
 import QaBox from "./lib/components/QaBox/QaBox.vue"
+import { shortcutItem } from './lib/types/types';
 
-function test(label: string) {
-  console.log(`Label: ${label}`);
+function test() {
+  const array:shortcutItem = {
+    label: 'test',
+  };
+
+  return array;
 }
 
 </script>
