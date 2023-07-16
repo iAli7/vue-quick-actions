@@ -1,5 +1,8 @@
 <template>
-  <div class="quick-action">
+  <div
+    v-if="showQuickAction"
+    class="quick-action"
+  >
     <div class="quick-action-search">
       <input
         v-model="searchValue"
@@ -9,7 +12,7 @@
         type="text"
       >
       <div
-        v-if="isLoading"
+        v-if="loading"
         class="quick-action-search-loading-wrapper"
       >
         <div
@@ -90,7 +93,6 @@ import {
   ref, onMounted, watch, computed, onBeforeUnmount,
 } from 'vue';
 
-import figmaLogo from '../../../assets/images/figma.png';
 import { shortcutItem } from '../../types/types';
 
 import { handleQaSearch } from './search';
@@ -102,58 +104,16 @@ const emit = defineEmits<{
   search: any
 }>();
 
+const props = defineProps<{
+  items: shortcutItem[]
+}>();
+
 const searchValue = ref('');
 const focusItem = ref(0);
-const isLoading = ref(false);
+const loading = ref(false);
+const showQuickAction = ref(false);
 
-const originalQaList = ref<shortcutItem[]>([
-  {
-    label: 'Figma',
-    separator: true,
-    key: 'figma-separator',
-  },
-  {
-    label: 'Figma',
-    icon: figmaLogo,
-    alias: ['design'],
-    key: 'figma',
-    role: 'Group',
-    onSelect: () => {
-      console.log('test');
-    },
-
-    children: [
-      {
-        label: 'Figma Child 1',
-        key: 'figma-child',
-
-        onSelect: () => {
-          console.log('test child');
-        },
-        children: [
-          {
-            label: 'Figma Child 1 Child',
-            key: 'figma-child-child',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    label: 'AdobeXD',
-    separator: true,
-    key: 'adobexd-separator',
-  },
-  {
-    label: 'AdobeXD',
-    alias: 'design',
-    key: 'adobexd',
-    role: 'Test',
-    onSelect: () => {
-      console.log('test');
-    },
-  },
-]);
+const originalQaList = ref<shortcutItem[]>(props.items);
 
 const activeParentPath = ref<shortcutItem[]>([]);
 
@@ -239,6 +199,10 @@ const handleKeyboard = (event: KeyboardEvent) => {
   } else if (event.key === 'Backspace') {
     activeParentPath.value.pop();
     focusItem.value = 0;
+  } else if (event.ctrlKey && event.key === 'k') {
+    showQuickAction.value = true;
+  } else if (event.key === 'Escape') {
+    showQuickAction.value = false;
   }
 };
 
