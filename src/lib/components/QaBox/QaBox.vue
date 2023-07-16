@@ -108,7 +108,6 @@ interface Props{
 }
 
 const userProvidedFunction = defineProps<Props>();
-const historyPath = ref<shortcutItem[]>([]);
 
 const emit = defineEmits<{
   searchChange: any
@@ -256,10 +255,8 @@ const executeUserFunction = async () => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     await userProvidedFunction.function();
 
-    if (!qaList.value.some((item) => item.label === 'hey')) {
-      qaList.value.push({
-        label: 'hey',
-      });
+    if (!qaList.value.some((item) => item.label === userProvidedFunction.function().label)) {
+      qaList.value.push(userProvidedFunction.function());
     }
   } catch (error) {
     console.error('Error executing user function:', error);
@@ -287,36 +284,6 @@ watch(searchValue, () => {
   emit('searchChange', searchValue.value);
 });
 
-onMounted(() => {
-  window.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowDown') {
-      if (focusItem.value < qaList.value.length - 1) {
-        focusItem.value += 1;
-      }
-    } else if (event.key === 'ArrowUp') {
-      if (focusItem.value > 0) {
-        focusItem.value -= 1;
-      }
-    } else if (event.key === 'Enter') {
-      const currentItem = qaList.value[focusItem.value];
-      if (currentItem && typeof currentItem.onSelect === 'function') {
-        currentItem.onSelect();
-      }
-    } else if (event.key === 'Escape') {
-      activeParentPath.value.pop();
-      focusItem.value = 0;
-    }
-  });
-});
-
-const itemsToRender = computed(() => {
-  if (activeParentPath.value.length > 0) {
-    return activeParentPath.value[activeParentPath.value.length - 1].children;
-  }
-
-  return qaList.value;
-});
-
 const handleSelect = (item: shortcutItem) => {
   if (originalQaList.value.includes(item)) {
     activeParentPath.value = [];
@@ -330,9 +297,65 @@ const handleSelect = (item: shortcutItem) => {
   if (item.onSelect) {
     item.onSelect();
   }
-
-  historyPath.value.push(item);
 };
+
+const itemsToRender = computed(() => {
+  if (activeParentPath.value.length > 0) {
+    return activeParentPath.value[activeParentPath.value.length - 1].children;
+  }
+
+  return qaList.value;
+});
+
+const nextItem = () => {
+  if (itemsToRender.value) {
+    let index = focusItem.value;
+    while (index < itemsToRender.value.length - 1) {
+      index += 1;
+      if (!itemsToRender.value[index].separator) {
+        return index;
+      }
+    }
+  }
+
+  return focusItem.value;
+};
+
+const prevItem = () => {
+  if (itemsToRender.value) {
+    let index = focusItem.value;
+    while (index > 0) {
+      index -= 1;
+      if (!itemsToRender.value[index].separator) {
+        return index;
+      }
+    }
+  }
+
+  return focusItem.value;
+};
+
+onMounted(() => {
+  window.addEventListener('keydown', (event) => {
+    if (!itemsToRender.value) return;
+
+    if (event.key === 'ArrowDown') {
+      focusItem.value = nextItem();
+    } else if (event.key === 'ArrowUp') {
+      focusItem.value = prevItem();
+    } else if (event.key === 'Enter') {
+      const currentItem = itemsToRender.value[focusItem.value];
+      if (currentItem && typeof currentItem.onSelect === 'function') {
+        currentItem.onSelect();
+        handleSelect(currentItem);
+      }
+    } else if (event.key === 'Escape') {
+      activeParentPath.value.pop();
+      focusItem.value = 0;
+    }
+    console.log(focusItem.value);
+  });
+});
 </script>
 
 <style src="./QaBox.scss" lang="scss" />
