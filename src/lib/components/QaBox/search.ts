@@ -5,9 +5,10 @@ export const handleQaSearch = (query: string, items: shortcutItem[]): shortcutIt
 
   const searchItems = (_items: shortcutItem[]) => {
     _items.forEach((item) => {
-      if (!item.label) return;
+      if (!item.label && !item.alias) return;
 
-      if (item.label.toLowerCase().includes(query.toLowerCase())) {
+      if ((item.label && item.label.toLowerCase().includes(query.toLowerCase()))
+          || (item.alias && item.alias.toLowerCase().includes(query.toLowerCase()))) {
         flattenedItems.push(item);
       }
 
