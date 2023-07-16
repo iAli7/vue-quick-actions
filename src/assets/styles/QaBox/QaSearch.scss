@@ -23,7 +23,7 @@
         background: #fff;
         height: 1px;
         width: 25%;
-        animation: loadAnimation 3s infinite;
+        animation: lineLoading 1s infinite;
 
         &-wrapper {
             bottom: -1px;
@@ -48,22 +48,27 @@
     }
 }
 
-@keyframes loadAnimation {
+@keyframes lineLoading {
     0% {
-        transform: translateX(0);
+        margin-left: -10%;
+        width: 80px
     }
-    70%,
-    90% {
-        transform: translateX(500%);
+
+    25% {
+        width: 240px
     }
-    95%{
-        opacity: 0;
+
+    50% {
+        margin-left: 100%;
+        width: 80px
     }
-    98%{
-        transform: translateX(-100%)
-        opacity 1;
+
+    75% {
+        width: 240px
     }
-    100% {
-        transform: translateX(0);
+
+    to {
+        margin-left: -10%;
+        width: 80px
     }
 }
