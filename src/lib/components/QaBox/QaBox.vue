@@ -120,7 +120,6 @@ const originalQaList = ref<shortcutItem[]>([
   {
     label: 'Figma',
     icon: figmaLogo,
-    role: 'group',
     alias: 'design',
     onSelect: () => {
       console.log('test');
@@ -129,28 +128,28 @@ const originalQaList = ref<shortcutItem[]>([
     children: [
       {
         label: 'Figma Child 1',
-        role: 'application',
+
         onSelect: () => {
           console.log('test child');
         },
         children: [
           {
             label: 'Figma Child 1 Child',
-            role: 'application',
+
             onSelect: () => { },
           },
         ],
       },
       {
         label: 'Figma Child 2',
-        role: 'application',
+
         onSelect: () => {
           console.log('test child');
         },
       },
       {
         label: 'Figma Child 3',
-        role: 'application',
+
         onSelect: () => {
           console.log('test child');
         },
@@ -163,7 +162,16 @@ const originalQaList = ref<shortcutItem[]>([
   },
   {
     label: 'AdobeXD',
-    role: 'application',
+    alias: 'design',
+    onSelect: () => {
+      console.log('test');
+    },
+  },
+  {
+    separator: true,
+  },
+  {
+    label: 'AdobeXD',
     alias: 'design',
     onSelect: () => {
       console.log('test');
@@ -171,7 +179,6 @@ const originalQaList = ref<shortcutItem[]>([
   },
   {
     label: 'AdobeXD',
-    role: 'application',
     alias: 'design',
     onSelect: () => {
       console.log('test');
@@ -179,7 +186,6 @@ const originalQaList = ref<shortcutItem[]>([
   },
   {
     label: 'AdobeXD',
-    role: 'application',
     alias: 'design',
     onSelect: () => {
       console.log('test');
@@ -187,7 +193,6 @@ const originalQaList = ref<shortcutItem[]>([
   },
   {
     label: 'AdobeXD',
-    role: 'application',
     alias: 'design',
     onSelect: () => {
       console.log('test');
@@ -195,7 +200,6 @@ const originalQaList = ref<shortcutItem[]>([
   },
   {
     label: 'AdobeXD',
-    role: 'application',
     alias: 'design',
     onSelect: () => {
       console.log('test');
@@ -203,7 +207,6 @@ const originalQaList = ref<shortcutItem[]>([
   },
   {
     label: 'AdobeXD',
-    role: 'application',
     alias: 'design',
     onSelect: () => {
       console.log('test');
@@ -211,7 +214,6 @@ const originalQaList = ref<shortcutItem[]>([
   },
   {
     label: 'AdobeXD',
-    role: 'application',
     alias: 'design',
     onSelect: () => {
       console.log('test');
@@ -219,15 +221,6 @@ const originalQaList = ref<shortcutItem[]>([
   },
   {
     label: 'AdobeXD',
-    role: 'application',
-    alias: 'design',
-    onSelect: () => {
-      console.log('test');
-    },
-  },
-  {
-    label: 'AdobeXD',
-    role: 'application',
     alias: 'design',
     onSelect: () => {
       console.log('test');
@@ -263,7 +256,10 @@ watch(searchValue, () => {
   } else {
     const searchResults = handleQaSearch(searchValue.value, originalQaList.value);
     qaList.value = searchResults.filter((item) => !item.separator);
-    executeUserFunction();
+
+    if (searchValue.value[0] === '>') {
+      executeUserFunction();
+    }
   }
 
   emit('searchChange', searchValue.value);

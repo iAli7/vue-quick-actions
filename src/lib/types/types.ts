@@ -1,7 +1,6 @@
 export interface shortcutItem {
-  label: string;
+  label?: string;
   icon?: Object;
-  role?: string;
   alias?: string | null;
   separator?: boolean;
   onSelect?: () => void;

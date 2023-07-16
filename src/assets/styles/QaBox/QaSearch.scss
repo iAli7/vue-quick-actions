@@ -26,7 +26,7 @@
         animation: loadAnimation 3s infinite;
 
         &-wrapper {
-            bottom: 0;
+            bottom: -1px;
             position: absolute;
             width: 100%;
             height: 1px;

@@ -2,6 +2,7 @@
   <div
     v-if="item.separator"
     class="quick-action-list-separator"
+    :class="{'quick-action-list-separator-line': !item.label}"
   >
     {{ item.label || '' }}
   </div>
