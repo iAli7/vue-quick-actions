@@ -18,17 +18,23 @@
       </div>
     </div>
     <div class="quick-action-content">
-      <div class="quick-action-list">
-        <QuickActionItem
-          v-for="
-            (item, index) in itemsToRender"
-          :key="index"
-          :item="item"
-          :focus="focusItem === index"
-          @focus="focusItem = index"
-          @select="handleSelect(item)"
-        />
-      </div>
+      <transition-group
+        name="fade"
+        tag="div"
+        class="quick-action-list"
+      >
+        <div class="quick-action-list">
+          <QuickActionItem
+            v-for="
+              (item, index) in itemsToRender"
+            :key="index"
+            :item="item"
+            :focus="focusItem === index"
+            @focus="focusItem = index"
+            @select="handleSelect(item)"
+          />
+        </div>
+      </transition-group>
     </div>
     <div class="quick-action-bottom">
       <div class="quick-action-badge">
@@ -121,6 +127,7 @@ const originalQaList = ref<shortcutItem[]>([
     label: 'Figma',
     icon: figmaLogo,
     alias: 'design',
+    role: 'Group',
     onSelect: () => {
       console.log('test');
     },
@@ -163,6 +170,7 @@ const originalQaList = ref<shortcutItem[]>([
   {
     label: 'AdobeXD',
     alias: 'design',
+    role: 'Test',
     onSelect: () => {
       console.log('test');
     },
