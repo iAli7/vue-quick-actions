@@ -4,13 +4,13 @@
     class="quick-action-list-separator"
     :class="{'quick-action-list-separator-line': !item.label}"
   >
-    {{ item.label || '' }}
+    {{ item.label }}
   </div>
   <div
-    v-if="!item.separator"
+    v-else
     class="quick-action-list-item"
-    :class="{ 'quick-action-list-item-focused': focus }"
-    @click="$emit('select'), showChildren = !showChildren"
+    :class="{ 'quick-action-list-item-focused': focused }"
+    @click="handleClickItem"
     @mouseenter="$emit('focus')"
   >
     <div class="quick-action-list-item-left">
@@ -21,33 +21,38 @@
         <img :src="item.icon">
       </div>
       <div class="quick-action-list-item-title">
-        {{ item?.label }}
+        {{ item.label }}
       </div>
     </div>
     <div class="quick-action-list-item-role">
-      {{ item?.role }}
+      {{ item.role }}
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { PropType, ref } from 'vue';
+
+import { shortcutItem } from '../../types/types';
 
 const showChildren = ref(false);
 
-const props = defineProps({
+defineProps({
   item: {
-    type: Object,
+    type: Object as PropType<shortcutItem>,
     required: true,
   },
-  focus: Boolean,
+  focused: Boolean,
 });
 
-defineEmits({
-  select: null,
-  focus: null,
+const emit = defineEmits({
+  select: () => Boolean,
+  focus: () => Boolean,
 });
 
-const item = computed(() => props.item);
-const focus = computed(() => props.focus);
+const handleClickItem = () => {
+  emit('select');
+
+  showChildren.value = !showChildren.value;
+};
 </script>

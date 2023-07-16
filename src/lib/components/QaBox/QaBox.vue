@@ -18,23 +18,17 @@
       </div>
     </div>
     <div class="quick-action-content">
-      <transition-group
-        name="fade"
-        tag="div"
-        class="quick-action-list"
-      >
-        <div class="quick-action-list">
-          <QuickActionItem
-            v-for="
-              (item, index) in itemsToRender"
-            :key="index"
-            :item="item"
-            :focus="focusItem === index"
-            @focus="focusItem = index"
-            @select="handleSelect(item)"
-          />
-        </div>
-      </transition-group>
+      <div class="quick-action-list">
+        <QuickActionItem
+          v-for="
+            (item, index) in itemsToRender"
+          :key="item.key"
+          :item="item"
+          :focused="focusItem === index"
+          @focus="focusItem = index"
+          @select="handleSelect(item)"
+        />
+      </div>
     </div>
     <div class="quick-action-bottom">
       <div class="quick-action-badge">
@@ -42,6 +36,7 @@
           v-for="(item, index) in activeParentPath"
           :key="index"
           class="quick-action-badge-item"
+          @click="handleClickPath(item)"
         >
           {{ item.label + (index < activeParentPath.length - 1 ? ' -> ' : '') }}
         </span>
@@ -92,7 +87,7 @@
 
 <script setup lang="ts">
 import {
-  ref, onMounted, watch, computed,
+  ref, onMounted, watch, computed, onBeforeUnmount,
 } from 'vue';
 
 import figmaLogo from '../../../assets/images/figma.png';
@@ -103,14 +98,8 @@ import { handleQaSearch } from './search';
 // eslint-disable-next-line
 import QuickActionItem from '../QaListItem/QaListItem.vue';
 
-interface Props{
-  function: Function;
-}
-
-const userProvidedFunction = defineProps<Props>();
-
 const emit = defineEmits<{
-  searchChange: any
+  search: any
 }>();
 
 const searchValue = ref('');
@@ -121,11 +110,13 @@ const originalQaList = ref<shortcutItem[]>([
   {
     label: 'Figma',
     separator: true,
+    key: 'figma-separator',
   },
   {
     label: 'Figma',
     icon: figmaLogo,
-    alias: 'design',
+    alias: ['design'],
+    key: 'figma',
     role: 'Group',
     onSelect: () => {
       console.log('test');
@@ -134,6 +125,7 @@ const originalQaList = ref<shortcutItem[]>([
     children: [
       {
         label: 'Figma Child 1',
+        key: 'figma-child',
 
         onSelect: () => {
           console.log('test child');
@@ -141,94 +133,22 @@ const originalQaList = ref<shortcutItem[]>([
         children: [
           {
             label: 'Figma Child 1 Child',
-
-            onSelect: () => { },
+            key: 'figma-child-child',
           },
         ],
-      },
-      {
-        label: 'Figma Child 2',
-
-        onSelect: () => {
-          console.log('test child');
-        },
-      },
-      {
-        label: 'Figma Child 3',
-
-        onSelect: () => {
-          console.log('test child');
-        },
       },
     ],
   },
   {
     label: 'AdobeXD',
     separator: true,
+    key: 'adobexd-separator',
   },
   {
     label: 'AdobeXD',
     alias: 'design',
+    key: 'adobexd',
     role: 'Test',
-    onSelect: () => {
-      console.log('test');
-    },
-  },
-  {
-    separator: true,
-  },
-  {
-    label: 'AdobeXD',
-    alias: 'design',
-    onSelect: () => {
-      console.log('test');
-    },
-  },
-  {
-    label: 'AdobeXD',
-    alias: 'design',
-    onSelect: () => {
-      console.log('test');
-    },
-  },
-  {
-    label: 'AdobeXD',
-    alias: 'design',
-    onSelect: () => {
-      console.log('test');
-    },
-  },
-  {
-    label: 'AdobeXD',
-    alias: 'design',
-    onSelect: () => {
-      console.log('test');
-    },
-  },
-  {
-    label: 'AdobeXD',
-    alias: 'design',
-    onSelect: () => {
-      console.log('test');
-    },
-  },
-  {
-    label: 'AdobeXD',
-    alias: 'design',
-    onSelect: () => {
-      console.log('test');
-    },
-  },
-  {
-    label: 'AdobeXD',
-    alias: 'design',
-    onSelect: () => {
-      console.log('test');
-    },
-  },
-  {
-    label: 'AdobeXD',
-    alias: 'design',
     onSelect: () => {
       console.log('test');
     },
@@ -237,33 +157,7 @@ const originalQaList = ref<shortcutItem[]>([
 
 const activeParentPath = ref<shortcutItem[]>([]);
 
-const qaList = ref<shortcutItem[]>([...originalQaList.value]);
-
-const helpList = ref<shortcutItem[]>([
-  {
-    separator: true,
-    label: 'Modes',
-  },
-  {
-    label: 'Activate command mode',
-  },
-]);
-
-const executeUserFunction = async () => {
-  isLoading.value = true;
-  try {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    await userProvidedFunction.function();
-
-    if (!qaList.value.some((item) => item.label === userProvidedFunction.function().label)) {
-      qaList.value.push(userProvidedFunction.function());
-    }
-  } catch (error) {
-    console.error('Error executing user function:', error);
-  } finally {
-    isLoading.value = false;
-  }
-};
+const qaList = ref<shortcutItem[]>(originalQaList.value);
 
 watch(searchValue, () => {
   if (searchValue.value === '') {
@@ -271,17 +165,9 @@ watch(searchValue, () => {
   } else {
     const searchResults = handleQaSearch(searchValue.value, originalQaList.value);
     qaList.value = searchResults.filter((item) => !item.separator);
-
-    if (searchValue.value[0] === '>') {
-      executeUserFunction();
-    }
-
-    if (searchValue.value[0] === '?') {
-      qaList.value = helpList.value;
-    }
   }
 
-  emit('searchChange', searchValue.value);
+  emit('search', searchValue.value);
 });
 
 const handleSelect = (item: shortcutItem) => {
@@ -307,54 +193,61 @@ const itemsToRender = computed(() => {
   return qaList.value;
 });
 
-const nextItem = () => {
-  if (itemsToRender.value) {
-    let index = focusItem.value;
-    while (index < itemsToRender.value.length - 1) {
-      index += 1;
-      if (!itemsToRender.value[index].separator) {
-        return index;
-      }
-    }
+const navigate = (direction: number) => {
+  if (!itemsToRender.value) {
+    return focusItem.value;
   }
 
-  return focusItem.value;
+  let index = focusItem.value;
+  while (true) {
+    index += direction;
+    if (index >= itemsToRender.value.length) {
+      index = 0;
+    } else if (index < 0) {
+      index = itemsToRender.value.length - 1;
+    }
+
+    if (!itemsToRender.value[index].separator) {
+      return index;
+    }
+  }
 };
 
-const prevItem = () => {
-  if (itemsToRender.value) {
-    let index = focusItem.value;
-    while (index > 0) {
-      index -= 1;
-      if (!itemsToRender.value[index].separator) {
-        return index;
-      }
-    }
+const handleClickPath = (item: shortcutItem) => {
+  const itemIndex = activeParentPath.value.findIndex((pathItem) => pathItem.key === item.key);
+
+  if (itemIndex !== -1) {
+    activeParentPath.value = activeParentPath.value.slice(0, itemIndex + 1);
   }
 
-  return focusItem.value;
+  focusItem.value = 0;
+};
+
+const handleKeyboard = (event: KeyboardEvent) => {
+  if (!itemsToRender.value) return;
+
+  if (event.key === 'ArrowDown') {
+    focusItem.value = navigate(1);
+  } else if (event.key === 'ArrowUp') {
+    focusItem.value = navigate(-1);
+  } else if (event.key === 'Enter') {
+    const currentItem = itemsToRender.value[focusItem.value];
+
+    if (currentItem.onSelect) {
+      handleSelect(currentItem);
+    }
+  } else if (event.key === 'Backspace') {
+    activeParentPath.value.pop();
+    focusItem.value = 0;
+  }
 };
 
 onMounted(() => {
-  window.addEventListener('keydown', (event) => {
-    if (!itemsToRender.value) return;
+  window.addEventListener('keydown', handleKeyboard);
+});
 
-    if (event.key === 'ArrowDown') {
-      focusItem.value = nextItem();
-    } else if (event.key === 'ArrowUp') {
-      focusItem.value = prevItem();
-    } else if (event.key === 'Enter') {
-      const currentItem = itemsToRender.value[focusItem.value];
-      if (currentItem && typeof currentItem.onSelect === 'function') {
-        currentItem.onSelect();
-        handleSelect(currentItem);
-      }
-    } else if (event.key === 'Escape') {
-      activeParentPath.value.pop();
-      focusItem.value = 0;
-    }
-    console.log(focusItem.value);
-  });
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', handleKeyboard);
 });
 </script>
 

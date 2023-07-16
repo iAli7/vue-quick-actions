@@ -1,20 +1,14 @@
 <template>
-  <QaBox :function="test" />
+  <QaBox @search="handleSearch" />
 </template>
 
 <script setup lang="ts">
 // eslint-disable-next-line
 import QaBox from "./lib/components/QaBox/QaBox.vue"
-import { shortcutItem } from './lib/types/types';
 
-function test() {
-  const array:shortcutItem = {
-    label: 'test',
-  };
-
-  return array;
-}
-
+const handleSearch = () => {
+  console.log('ads');
+};
 </script>
 
 <style src="./assets/styles/base/body.scss" lang="scss" />

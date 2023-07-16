@@ -3,7 +3,7 @@ export interface shortcutItem {
   key: string;
   icon?: string;
   role?: string;
-  alias?: string | null;
+  alias?: string | string[];
   separator?: boolean;
   onSelect?: () => void;
   children?: shortcutItem[]
