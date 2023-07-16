@@ -232,6 +232,16 @@ const activeParentPath = ref<shortcutItem[]>([]);
 
 const qaList = ref<shortcutItem[]>([...originalQaList.value]);
 
+const helpList = ref<shortcutItem[]>([
+  {
+    separator: true,
+    label: 'Modes',
+  },
+  {
+    label: 'Activate command mode',
+  },
+]);
+
 const executeUserFunction = async () => {
   isLoading.value = true;
   try {
@@ -259,6 +269,10 @@ watch(searchValue, () => {
 
     if (searchValue.value[0] === '>') {
       executeUserFunction();
+    }
+
+    if (searchValue.value[0] === '?') {
+      qaList.value = helpList.value;
     }
   }
 
