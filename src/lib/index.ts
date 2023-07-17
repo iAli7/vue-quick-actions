@@ -1,5 +1,5 @@
-import QaBox from './components/QaBox/QaBox.vue';
+import VueQuickAction from './components/QaBox/QaBox.vue';
 
 export {
-  QaBox,
+  VueQuickAction,
 };
