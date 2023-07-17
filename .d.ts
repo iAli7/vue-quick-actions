@@ -1,6 +1,8 @@
 import { DefineComponent, Ref } from 'vue';
 import { shortcutItem } from './src/lib/types/types';
 
+declare module 'vue-quick-actions';
+
 export const QaBox: DefineComponent<
   {
     items: shortcutItem[];

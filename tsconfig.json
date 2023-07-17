@@ -8,8 +8,11 @@
     "jsx": "preserve",
     "typeRoots": [
       "./node_modules/@types",
-      "./.d.ts"
+      "./@types",
+      "./src",
     ],
+    "declaration": true,
+    "outDir": "./dist",
 
     /* Linting */
     "strict": true,

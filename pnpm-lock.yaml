@@ -17,6 +17,9 @@ dependencies:
   vue:
     specifier: ^3.3.4
     version: 3.3.4
+  vue-quick-actions:
+    specifier: ^1.0.6
+    version: 1.0.6(eslint@7.32.0)(typescript@5.1.6)(vite@4.4.0)
 
 devDependencies:
   '@typescript-eslint/eslint-plugin':
@@ -3751,6 +3754,22 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /vue-quick-actions@1.0.6(eslint@7.32.0)(typescript@5.1.6)(vite@4.4.0):
+    resolution: {integrity: sha512-bUEaBPbMumqOdYUGsRUlSbMUeGyWzvs24uvIiO93bBQ5wndfV6w/kNrwQYJ4A2Yzu+kUbnKygMFVos2JjzGb0w==}
+    dependencies:
+      eslint-config-google: 0.14.0(eslint@7.32.0)
+      sass: 1.63.6
+      vite-plugin-dts: 3.3.0(typescript@5.1.6)(vite@4.4.0)
+      vue: 3.3.4
+    transitivePeerDependencies:
+      - '@types/node'
+      - eslint
+      - rollup
+      - supports-color
+      - typescript
+      - vite
+    dev: false
 
   /vue-template-compiler@2.7.14:
     resolution: {integrity: sha512-zyA5Y3ArvVG0NacJDkkzJuPQDF8RFeRlzV2vLeSnhSpieO6LK2OVbdLPi5MPPs09Ii+gMO8nY4S3iKQxBxDmWQ==}
