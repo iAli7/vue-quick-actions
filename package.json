@@ -1,7 +1,7 @@
 {
   "name": "vue-quick-actions",
   "private": false,
-  "version": "1.0.8",
+  "version": "1.0.9",
   "type": "module",
   "main": "dist/vue-quick-actions.es.js",
   "module": "dist/vue-quick-actions.umd.js",
