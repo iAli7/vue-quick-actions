@@ -1,6 +1,8 @@
+import { Component } from 'vue';
+
 interface BaseItem {
   key: string;
-  icon?: string;
+  icon?: string | Component;
   role?: string;
 }
 
