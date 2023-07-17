@@ -1,6 +1,6 @@
 import { shortcutItem } from '../../types/types';
 
-export const handleQaSearch = (query: string, items: shortcutItem[]): shortcutItem[] => {
+export const getItemsByQuery = (query: string, items: shortcutItem[]): shortcutItem[] => {
   const flattenedItems: shortcutItem[] = [];
 
   const searchItems = (_items: shortcutItem[], isTopLevel: boolean = true) => {
@@ -14,7 +14,7 @@ export const handleQaSearch = (query: string, items: shortcutItem[]): shortcutIt
       }
 
       if (item.children && isTopLevel) {
-        const matchingChildren = handleQaSearch(query, item.children);
+        const matchingChildren = getItemsByQuery(query, item.children);
         flattenedItems.push(...matchingChildren);
       }
     });

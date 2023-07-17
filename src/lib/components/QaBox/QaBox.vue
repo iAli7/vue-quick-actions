@@ -34,7 +34,7 @@ import QaSearch from '../QaSearch/QaSearch.vue';
 import QaBody from '../QaBody/QaBody.vue';
 // eslint-disable-next-line
 import QaFooter from '../QaFooter/QaFooter.vue';
-import { handleQaSearch } from './search';
+import { getItemsByQuery } from './search';
 
 const emit = defineEmits<{
   search: any
@@ -63,7 +63,7 @@ watch(searchValue, () => {
   if (searchValue.value === '') {
     qaList.value = [...originalQaList.value];
   } else {
-    const searchResults = handleQaSearch(searchValue.value, originalQaList.value);
+    const searchResults = getItemsByQuery(searchValue.value, originalQaList.value);
     qaList.value = searchResults.filter((item) => !item.separator);
   }
 
