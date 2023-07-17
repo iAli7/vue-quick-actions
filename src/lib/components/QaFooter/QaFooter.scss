@@ -1,0 +1,32 @@
+.quick-action-footer{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: .25rem .5rem;
+        background: #1c1c1c;
+        border-top: 1px solid #343434;
+
+        &-keys{
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        
+            &-item{
+                align-items: center;
+                background: linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.12) 100%),#282828;
+                border-radius: 4px;
+                display: flex;
+                height: 15px;
+                justify-content: center;
+                position: relative;
+                width: 15px;
+                padding: 0 1px;
+                color: rgba(#fff, .4);
+                font-size: 5.5px;
+        
+                svg{
+                    opacity: .24;
+                }
+            }
+        }
+    }

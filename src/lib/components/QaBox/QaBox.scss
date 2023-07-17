@@ -10,15 +10,6 @@
     top: 3rem;
     overflow: hidden;
 
-    &-bottom{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: .25rem .5rem;
-        background: #1c1c1c;
-        border-top: 1px solid #343434;
-    }
-
     &-badge{
         font-size: 9px;
         opacity: .6;
