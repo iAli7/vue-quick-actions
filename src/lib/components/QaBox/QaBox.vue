@@ -48,30 +48,14 @@ const props = defineProps<{
 const searchValue = ref('');
 const focusedItemIndex = ref(0);
 const showQuickAction = ref(false);
-
-const originalQaList = ref<shortcutItem[]>(props.items);
-
 const activeParentPath = ref<shortcutItem[]>([]);
 
-const qaList = ref<shortcutItem[]>(originalQaList.value);
-
-watch(() => props.items, (newItems) => {
-  originalQaList.value = newItems;
-});
-
 watch(searchValue, () => {
-  if (searchValue.value === '') {
-    qaList.value = [...originalQaList.value];
-  } else {
-    const searchResults = getItemsByQuery(searchValue.value, originalQaList.value);
-    qaList.value = searchResults.filter((item) => !item.separator);
-  }
-
   emit('search', searchValue.value);
 });
 
 const handleSelect = (item: shortcutItem) => {
-  if (originalQaList.value.includes(item)) {
+  if (props.items.includes(item)) {
     activeParentPath.value = [];
   }
 
@@ -88,7 +72,13 @@ const itemsToRender = computed(() => {
     return activeParentPath.value[activeParentPath.value.length - 1].children;
   }
 
-  return qaList.value;
+  if (searchValue.value === '') {
+    return props.items;
+  }
+
+  const searchResults = getItemsByQuery(searchValue.value, props.items);
+
+  return searchResults.filter((item) => !item.separator);
 });
 
 const navigate = (direction: number) => {
@@ -112,7 +102,9 @@ const navigate = (direction: number) => {
 };
 
 const handleClickPath = (item: shortcutItem) => {
-  const itemIndex = activeParentPath.value.findIndex((pathItem) => pathItem.key === item.key);
+  const itemIndex = activeParentPath.value.findIndex(
+    (pathItem) => pathItem.key === item.key,
+  );
 
   if (itemIndex !== -1) {
     activeParentPath.value = activeParentPath.value.slice(0, itemIndex + 1);

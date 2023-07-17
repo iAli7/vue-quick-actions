@@ -3,19 +3,17 @@ import { shortcutItem } from '../../types/types';
 export const getItemsByQuery = (query: string, items: shortcutItem[]): shortcutItem[] => {
   const flattenedItems: shortcutItem[] = [];
 
-  const searchItems = (_items: shortcutItem[], isTopLevel: boolean = true) => {
+  const searchItems = (_items: shortcutItem[]) => {
     _items.forEach((item) => {
-      if (!item.label && !item.alias) return;
-
       const searchableLabel = [item.label, item.alias].filter(Boolean).join(' ').toLowerCase();
-
-      if (searchableLabel.includes(query.toLowerCase())) {
-        flattenedItems.push(item);
-      }
-
-      if (item.children && isTopLevel) {
+      if (item.children) {
         const matchingChildren = getItemsByQuery(query, item.children);
-        flattenedItems.push(...matchingChildren);
+        if (matchingChildren.length > 0) {
+          flattenedItems.push(...matchingChildren);
+        }
+      }
+      if (!item.children && searchableLabel.includes(query.toLowerCase())) {
+        flattenedItems.push(item);
       }
     });
   };
