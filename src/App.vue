@@ -1,6 +1,7 @@
 <template>
   <QaBox
     :items="qaList"
+    :loading="true"
     @search="handleSearch"
   />
 </template>
@@ -64,6 +65,3 @@ const handleSearch = () => {
 </script>
 
 <style src="./assets/styles/base/body.scss" lang="scss" />
-<style src="./assets/styles/QaBox/QaList.scss" lang="scss" />
-<style src="./assets/styles/QaBox/QaContent.scss" lang="scss" />
-<style src="./assets/styles/QaBox/QaSearch.scss" lang="scss" />

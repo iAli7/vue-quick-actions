@@ -3,36 +3,17 @@
     v-if="showQuickAction"
     class="quick-action"
   >
-    <div class="quick-action-search">
-      <input
-        v-model="searchValue"
-        placeholder="Search for apps and commands..."
-        autofocus
-        class="quick-action-search-input"
-        type="text"
-      >
-      <div
-        v-if="loading"
-        class="quick-action-search-loading-wrapper"
-      >
-        <div
-          class="quick-action-search-loading"
-        />
-      </div>
-    </div>
-    <div class="quick-action-content">
-      <div class="quick-action-list">
-        <QuickActionItem
-          v-for="
-            (item, index) in itemsToRender"
-          :key="item.key"
-          :item="item"
-          :focused="focusedItemIndex === index"
-          @focus="focusedItemIndex = index"
-          @select="handleSelect(item)"
-        />
-      </div>
-    </div>
+    <QaSearch
+      v-model="searchValue"
+      :loading="props.loading"
+      @search="handleSearch"
+    />
+    <QaContent
+      :items="itemsToRender"
+      :focused-item-index="focusedItemIndex"
+      @focus="focusedItemIndex = $event"
+      @select="handleSelect($event)"
+    />
     <div class="quick-action-bottom">
       <div class="quick-action-badge">
         <span
@@ -98,19 +79,21 @@ import { shortcutItem } from '../../types/types';
 import { handleQaSearch } from './search';
 
 // eslint-disable-next-line
-import QuickActionItem from '../QaListItem/QaListItem.vue';
+import QaSearch from '../QaSearch/QaSearch.vue';
+// eslint-disable-next-line
+import QaContent from '../QaContent/QaContent.vue';
 
 const emit = defineEmits<{
   search: any
 }>();
 
 const props = defineProps<{
-  items: shortcutItem[]
+  items: shortcutItem[],
+  loading: boolean
 }>();
 
 const searchValue = ref('');
 const focusedItemIndex = ref(0);
-const loading = ref(false);
 const showQuickAction = ref(false);
 
 const originalQaList = ref<shortcutItem[]>(props.items);
@@ -222,6 +205,3 @@ onBeforeUnmount(() => {
 </script>
 
 <style src="./QaBox.scss" lang="scss" />
-<style src="../../../assets/styles/QaBox/QaList.scss" lang="scss" />
-<style src="../../../assets/styles/QaBox/QaContent.scss" lang="scss" />
-<style src="../../../assets/styles/QaBox/QaSearch.scss" lang="scss" />
