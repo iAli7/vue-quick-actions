@@ -1,16 +1,23 @@
 {
   "name": "vue-quick-actions",
-  "private": true,
-  "version": "1.0.0",
+  "private": false,
+  "version": "1.0.6",
   "type": "module",
+  "main": "dist/vue-quick-actions.es.js",
+  "module": "dist/vue-quick-actions.umd.js",
   "scripts": {
+    "clean": "rimraf dist",
     "dev": "vite",
-    "build": "vue-tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "eslint-config-google": "^0.14.0",
     "sass": "^1.63.6",
+    "vite-plugin-dts": "^3.3.0",
     "vue": "^3.3.4"
   },
   "devDependencies": {
@@ -32,6 +39,7 @@
     "eslint-plugin-vue": "^9.14.1",
     "husky": "^7.0.4",
     "lint-staged": "^12.5.0",
+    "rimraf": "^5.0.1",
     "stylelint": "^14.16.1",
     "stylelint-config-sass-guidelines": "^8.0.0",
     "typescript": "^5.0.4",
