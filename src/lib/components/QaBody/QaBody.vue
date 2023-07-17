@@ -1,5 +1,5 @@
 <template>
-  <div class="quick-action-content">
+  <div class="quick-action-body">
     <QaList
       :items="itemsToRender"
       :focused-item-index="focusedItemIndex"
@@ -25,4 +25,4 @@ const props = defineProps<{
 const itemsToRender = computed(() => props.items);
 </script>
 
-<style src="./QaContent.scss" lang="scss" />
+<style src="./QaBody.scss" lang="scss" />
