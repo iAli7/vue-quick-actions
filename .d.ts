@@ -1,11 +1,11 @@
 import { DefineComponent, Ref } from 'vue';
-import { shortcutItem } from './src/lib/types/types';
+import { Item } from './src/lib/types/types';
 
 declare module 'vue-quick-actions';
 
 export const QaBox: DefineComponent<
   {
-    items: shortcutItem[];
+    items: Item[];
   },
   {},
   {
@@ -17,13 +17,13 @@ export const QaBox: DefineComponent<
     focusItem: Ref<number>;
     loading: Ref<boolean>;
     showQuickAction: Ref<boolean>;
-    activeParentPath: Ref<shortcutItem[]>;
-    originalQaList: Ref<shortcutItem[]>;
-    qaList: Ref<shortcutItem[]>;
-    handleSelect: (item: shortcutItem) => void;
-    itemsToRender: Ref<shortcutItem[]>;
+    activeParentPath: Ref<Item[]>;
+    originalQaList: Ref<Item[]>;
+    qaList: Ref<Item[]>;
+    handleSelect: (item: Item) => void;
+    itemsToRender: Ref<Item[]>;
     navigate: (direction: number) => number;
-    handleClickPath: (item: shortcutItem) => void;
+    handleClickPath: (item: Item) => void;
     handleKeyboard: (event: KeyboardEvent) => void;
   }
 >;

@@ -9,9 +9,9 @@
 <script setup lang="ts">
 // eslint-disable-next-line
 import QaBox from "./lib/components/QaBox/QaBox.vue"
-import { shortcutItem } from './lib/types/types';
+import { Item } from './lib/types/types';
 
-const qaList: shortcutItem[] = [
+const qaList: Item[] = [
   {
     label: 'Figma',
     separator: true,

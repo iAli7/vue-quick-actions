@@ -26,7 +26,7 @@ import {
   ref, onMounted, watch, computed, onBeforeUnmount,
 } from 'vue';
 
-import { shortcutItem } from '../../types/types';
+import { Item } from '../../types/types';
 
 // eslint-disable-next-line
 import QaSearch from '../QaSearch/QaSearch.vue';
@@ -41,20 +41,20 @@ const emit = defineEmits<{
 }>();
 
 const props = defineProps<{
-  items: shortcutItem[],
+  items: Item[],
   loading: boolean
 }>();
 
 const searchValue = ref('');
 const focusedItemIndex = ref(0);
 const showQuickAction = ref(false);
-const activeParentPath = ref<shortcutItem[]>([]);
+const activeParentPath = ref<Item[]>([]);
 
 watch(searchValue, () => {
   emit('search', searchValue.value);
 });
 
-const handleSelect = (item: shortcutItem) => {
+const handleSelect = (item: Item) => {
   if (props.items.includes(item)) {
     activeParentPath.value = [];
   }
@@ -101,7 +101,7 @@ const navigate = (direction: number) => {
   }
 };
 
-const handleClickPath = (item: shortcutItem) => {
+const handleClickPath = (item: Item) => {
   const itemIndex = activeParentPath.value.findIndex(
     (pathItem) => pathItem.key === item.key,
   );

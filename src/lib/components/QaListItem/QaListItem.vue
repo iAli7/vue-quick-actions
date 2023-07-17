@@ -35,13 +35,13 @@
 <script setup lang="ts">
 import { PropType, ref } from 'vue';
 
-import { shortcutItem } from '../../types/types';
+import { Item } from '../../types/types';
 
 const showChildren = ref(false);
 
 defineProps({
   item: {
-    type: Object as PropType<shortcutItem>,
+    type: Object as PropType<Item>,
     required: true,
   },
   focused: Boolean,

@@ -1,9 +1,9 @@
-import { shortcutItem } from '../../types/types';
+import { Item } from '../../types/types';
 
-export const getItemsByQuery = (query: string, items: shortcutItem[]): shortcutItem[] => {
-  const flattenedItems: shortcutItem[] = [];
+export const getItemsByQuery = (query: string, items: Item[]): Item[] => {
+  const flattenedItems: Item[] = [];
 
-  const searchItems = (_items: shortcutItem[]) => {
+  const searchItems = (_items: Item[]) => {
     _items.forEach((item) => {
       const searchableLabel = [item.label, item.alias].filter(Boolean).join(' ').toLowerCase();
       if (item.children) {

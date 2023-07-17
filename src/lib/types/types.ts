@@ -1,14 +1,22 @@
-export interface shortcutItem {
-  label?: string;
+interface BaseItem {
   key: string;
   icon?: string;
   role?: string;
-  alias?: string | string[];
-  separator?: boolean;
-  onSelect?: () => void;
-  children?: shortcutItem[]
 }
 
-export interface ShortcutItems {
-  items: shortcutItem[];
+interface NormalItem extends BaseItem {
+  label?: string;
+  alias?: string | string[];
+  onSelect?: () => void;
+  children?: Item[]
+}
+
+interface SeparatorItem extends BaseItem {
+  separator: true;
+}
+
+export type Item = NormalItem | SeparatorItem;
+
+export interface Items {
+  items: Item[];
 }

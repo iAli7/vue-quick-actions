@@ -12,13 +12,13 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import { shortcutItem } from '../../types/types';
+import { Item } from '../../types/types';
 
 // eslint-disable-next-line
 import QaList from '../QaList/QaList.vue';
 
 const props = defineProps<{
-    items: shortcutItem[];
+    items: Item[];
     focusedItemIndex: number;
   }>();
 
