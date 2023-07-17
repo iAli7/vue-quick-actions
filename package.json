@@ -1,7 +1,7 @@
 {
   "name": "vue-quick-actions",
   "private": false,
-  "version": "1.0.9",
+  "version": "1.0.10",
   "type": "module",
   "license": "MIT",
   "main": "dist/vue-quick-actions.es.js",
