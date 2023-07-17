@@ -27,8 +27,8 @@
             (item, index) in itemsToRender"
           :key="item.key"
           :item="item"
-          :focused="focusItem === index"
-          @focus="focusItem = index"
+          :focused="focusedItemIndex === index"
+          @focus="focusedItemIndex = index"
           @select="handleSelect(item)"
         />
       </div>
@@ -109,7 +109,7 @@ const props = defineProps<{
 }>();
 
 const searchValue = ref('');
-const focusItem = ref(0);
+const focusedItemIndex = ref(0);
 const loading = ref(false);
 const showQuickAction = ref(false);
 
@@ -118,6 +118,10 @@ const originalQaList = ref<shortcutItem[]>(props.items);
 const activeParentPath = ref<shortcutItem[]>([]);
 
 const qaList = ref<shortcutItem[]>(originalQaList.value);
+
+watch(() => props.items, (newItems) => {
+  originalQaList.value = newItems;
+});
 
 watch(searchValue, () => {
   if (searchValue.value === '') {
@@ -137,12 +141,10 @@ const handleSelect = (item: shortcutItem) => {
 
   if (item.children) {
     activeParentPath.value.push(item);
-    focusItem.value = 0;
+    focusedItemIndex.value = 0;
   }
 
-  if (item.onSelect) {
-    item.onSelect();
-  }
+  item.onSelect?.();
 };
 
 const itemsToRender = computed(() => {
@@ -155,10 +157,10 @@ const itemsToRender = computed(() => {
 
 const navigate = (direction: number) => {
   if (!itemsToRender.value) {
-    return focusItem.value;
+    return focusedItemIndex.value;
   }
 
-  let index = focusItem.value;
+  let index = focusedItemIndex.value;
   while (true) {
     index += direction;
     if (index >= itemsToRender.value.length) {
@@ -180,27 +182,31 @@ const handleClickPath = (item: shortcutItem) => {
     activeParentPath.value = activeParentPath.value.slice(0, itemIndex + 1);
   }
 
-  focusItem.value = 0;
+  focusedItemIndex.value = 0;
 };
 
 const handleKeyboard = (event: KeyboardEvent) => {
+  if (event.ctrlKey && event.key === 'k') {
+    showQuickAction.value = true;
+  }
+
+  if (!showQuickAction.value) return;
+
   if (!itemsToRender.value) return;
 
   if (event.key === 'ArrowDown') {
-    focusItem.value = navigate(1);
+    focusedItemIndex.value = navigate(1);
   } else if (event.key === 'ArrowUp') {
-    focusItem.value = navigate(-1);
+    focusedItemIndex.value = navigate(-1);
   } else if (event.key === 'Enter') {
-    const currentItem = itemsToRender.value[focusItem.value];
+    const currentItem = itemsToRender.value[focusedItemIndex.value];
 
     if (currentItem.onSelect) {
       handleSelect(currentItem);
     }
   } else if (event.key === 'Backspace') {
     activeParentPath.value.pop();
-    focusItem.value = 0;
-  } else if (event.ctrlKey && event.key === 'k') {
-    showQuickAction.value = true;
+    focusedItemIndex.value = 0;
   } else if (event.key === 'Escape') {
     showQuickAction.value = false;
   }
@@ -216,3 +222,6 @@ onBeforeUnmount(() => {
 </script>
 
 <style src="./QaBox.scss" lang="scss" />
+<style src="../../../assets/styles/QaBox/QaList.scss" lang="scss" />
+<style src="../../../assets/styles/QaBox/QaContent.scss" lang="scss" />
+<style src="../../../assets/styles/QaBox/QaSearch.scss" lang="scss" />

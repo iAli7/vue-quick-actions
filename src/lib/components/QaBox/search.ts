@@ -10,13 +10,12 @@ export const handleQaSearch = (query: string, items: shortcutItem[]): shortcutIt
       const searchableLabel = [item.label, item.alias].filter(Boolean).join(' ').toLowerCase();
 
       if (searchableLabel.includes(query.toLowerCase())) {
-        if (!isTopLevel) {
-          flattenedItems.push(item);
-        }
+        flattenedItems.push(item);
       }
 
-      if (item.children) {
-        searchItems(item.children, false);
+      if (item.children && isTopLevel) {
+        const matchingChildren = handleQaSearch(query, item.children);
+        flattenedItems.push(...matchingChildren);
       }
     });
   };

@@ -4,7 +4,10 @@
     border: 1px solid #343434;
     border-radius: 12px;
     width: 400px;
-    position: relative;
+    position: absolute;
+    color: #fff;
+    left: calc(50% - 200px);
+    top: 3rem;
     overflow: hidden;
 
     &-bottom{
