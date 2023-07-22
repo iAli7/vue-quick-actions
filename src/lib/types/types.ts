@@ -1,20 +1,21 @@
 import { Component } from 'vue';
 
 interface BaseItem {
-  key: string;
-  icon?: string | Component;
-  role?: string;
+  key: String;
 }
 
 interface NormalItem extends BaseItem {
-  label?: string;
-  alias?: string | string[];
+  label?: String;
+  alias?: String | String[];
   onSelect?: () => void;
+  icon?: String | Component;
+  role?: String;
   children?: Item[]
 }
 
 interface SeparatorItem extends BaseItem {
-  separator: true;
+  separator: Boolean;
+  label?: String;
 }
 
 export type Item = NormalItem | SeparatorItem;

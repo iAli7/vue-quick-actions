@@ -78,7 +78,7 @@ const itemsToRender = computed(() => {
 
   const searchResults = getItemsByQuery(searchValue.value, props.items);
 
-  return searchResults.filter((item) => !item.separator);
+  return searchResults;
 });
 
 const navigate = (direction: number) => {

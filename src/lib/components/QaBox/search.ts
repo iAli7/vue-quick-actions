@@ -20,5 +20,5 @@ export const getItemsByQuery = (query: string, items: Item[]): Item[] => {
 
   searchItems(items);
 
-  return flattenedItems;
+  return flattenedItems.filter((item) => !item.separator);
 };
