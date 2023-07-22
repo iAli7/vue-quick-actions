@@ -33,11 +33,9 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref } from 'vue';
+import { PropType } from 'vue';
 
 import { Item } from '../../types/types';
-
-const showChildren = ref(false);
 
 defineProps({
   item: {
@@ -54,7 +52,5 @@ const emit = defineEmits({
 
 const handleClickItem = () => {
   emit('select');
-
-  showChildren.value = !showChildren.value;
 };
 </script>
