@@ -6,7 +6,6 @@
     <QaSearch
       v-model="searchValue"
       :loading="props.loading"
-      @search="handleSearch"
     />
     <QaBody
       :items="itemsToRender"
@@ -16,7 +15,6 @@
     />
     <QaFooter
       :active-parent-path="activeParentPath"
-      :keyboard="props.keyboard"
       @clickPath="handleClickPath"
     />
   </div>
@@ -43,8 +41,7 @@ const emit = defineEmits<{
 
 const props = defineProps<{
   items: Item[],
-  loading: Boolean,
-  keyboard: Boolean
+  loading: boolean,
 }>();
 
 const searchValue = ref('');
