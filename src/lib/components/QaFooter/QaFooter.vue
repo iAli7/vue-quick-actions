@@ -1,5 +1,8 @@
 <template>
-  <div class="quick-action-footer">
+  <div
+    v-if="keyboard || activeParentPath.length > 0"
+    class="quick-action-footer"
+  >
     <div class="quick-action-badge">
       <span
         v-for="(item, index) in activeParentPath"
@@ -10,7 +13,10 @@
         {{ item.label + (index < activeParentPath.length - 1 ? ' -> ' : '') }}
       </span>
     </div>
-    <div class="quick-action-footer-keys">
+    <div
+      v-if="keyboard"
+      class="quick-action-footer-keys"
+    >
       <div class="quick-action-footer-keys-item">
         ESC
       </div>
@@ -59,6 +65,7 @@ const props = defineProps<{
     type: Array,
     required: true,
   },
+  keyboard: Boolean
 }>();
 
 const emit = defineEmits<{

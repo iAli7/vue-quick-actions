@@ -16,6 +16,7 @@
     />
     <QaFooter
       :active-parent-path="activeParentPath"
+      :keyboard="props.keyboard"
       @clickPath="handleClickPath"
     />
   </div>
@@ -37,12 +38,13 @@ import QaFooter from '../QaFooter/QaFooter.vue';
 import { getItemsByQuery } from './search';
 
 const emit = defineEmits<{
-  search: any
+  search: String
 }>();
 
 const props = defineProps<{
   items: Item[],
-  loading: boolean
+  loading: Boolean,
+  keyboard: Boolean
 }>();
 
 const searchValue = ref('');
