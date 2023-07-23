@@ -20,6 +20,10 @@
           class="quick-action-list-item-icon"
         >
           <img :src="item.icon">
+          <div v-if="typeof item.icon === 'string'" />
+          <div v-else>
+            <component :is="item.icon" />
+          </div>
         </div>
         <div class="quick-action-list-item-title">
           {{ item.label }}
@@ -37,13 +41,15 @@ import { PropType } from 'vue';
 
 import { Item } from '../../types/types';
 
-defineProps({
+const x = defineProps({
   item: {
     type: Object as PropType<Item>,
     required: true,
   },
   focused: Boolean,
 });
+
+console.log(x.item);
 
 const emit = defineEmits({
   select: () => Boolean,

@@ -10,6 +10,8 @@
 // eslint-disable-next-line
 import QaBox from "./lib/components/QaBox/QaBox.vue"
 import { Item } from './lib/types/types';
+// eslint-disable-next-line
+import image from "./assets/logo.png"
 
 const qaList: Item[] = [
   {
@@ -20,6 +22,7 @@ const qaList: Item[] = [
   {
     label: 'Figma',
     alias: ['design'],
+    icon: image,
     key: 'figma',
     role: 'Group',
     onSelect: () => {
