@@ -59,7 +59,7 @@ const emit = defineEmits({
 });
 
 const props = defineProps({
-  value: {
+  modelValue: {
     type: String,
     required: true,
   },
@@ -73,9 +73,9 @@ const props = defineProps({
   },
 });
 
-const searchValue = ref(props.value);
+const searchValue = ref(props.modelValue);
 
-watch(() => props.value, (newValue) => {
+watch(() => props.modelValue, (newValue) => {
   searchValue.value = newValue;
 });
 

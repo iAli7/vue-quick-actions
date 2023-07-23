@@ -60,6 +60,10 @@ const handleSelect = (item: Item) => {
     activeParentPath.value = [];
   }
 
+  if (!item.children) {
+    showQuickAction.value = false;
+  }
+
   if (item.children) {
     activeParentPath.value.push(item);
     focusedItemIndex.value = 0;

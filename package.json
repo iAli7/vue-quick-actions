@@ -1,7 +1,7 @@
 {
   "name": "vue-quick-actions",
   "private": false,
-  "version": "1.0.13",
+  "version": "1.0.16",
   "type": "module",
   "keywords": [
     "quick-actions",
