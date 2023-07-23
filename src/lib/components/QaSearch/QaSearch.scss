@@ -38,6 +38,11 @@
         width: 25px;
         border-radius: 5px;
         border: 1px solid #343434;
+        transition: .3s background ease;
+
+        &:hover{
+        background: #363636;
+        }
 
         svg{
             height: 14px;
