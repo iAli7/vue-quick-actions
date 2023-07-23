@@ -6,6 +6,8 @@
     <QaSearch
       v-model="searchValue"
       :loading="props.loading"
+      :active-parent-path="activeParentPath"
+      @backButtonClicked="handleBack"
     />
     <QaBody
       :items="itemsToRender"
@@ -112,6 +114,11 @@ const handleClickPath = (item: Item) => {
   focusedItemIndex.value = 0;
 };
 
+const handleBack = () => {
+  activeParentPath.value.pop();
+  focusedItemIndex.value = 0;
+};
+
 const handleKeyboard = (event: KeyboardEvent) => {
   if (event.ctrlKey && event.key === 'k') {
     showQuickAction.value = true;
@@ -132,8 +139,7 @@ const handleKeyboard = (event: KeyboardEvent) => {
       handleSelect(currentItem);
     }
   } else if (event.key === 'Backspace') {
-    activeParentPath.value.pop();
-    focusedItemIndex.value = 0;
+    handleBack();
   } else if (event.key === 'Escape') {
     showQuickAction.value = false;
   }

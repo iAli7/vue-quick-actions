@@ -41,15 +41,13 @@ import { PropType } from 'vue';
 
 import { Item } from '../../types/types';
 
-const x = defineProps({
+defineProps({
   item: {
     type: Object as PropType<Item>,
     required: true,
   },
   focused: Boolean,
 });
-
-console.log(x.item);
 
 const emit = defineEmits({
   select: () => Boolean,

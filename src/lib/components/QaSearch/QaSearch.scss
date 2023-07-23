@@ -4,6 +4,12 @@
     height: 100%;
     position: relative;
 
+    &-active{
+        .quick-action-search-input{
+            padding-left: 2.75rem;
+        }
+    }
+
     &-input {
         border: 0;
         outline: 0;
@@ -16,6 +22,25 @@
 
         &::placeholder {
             font-size: 10px;
+        }
+    }
+
+    &-back{
+        position: absolute;
+        top: calc(50% - 12.5px);
+        left: .5rem;
+        background: #2c2c2c;
+        height: 25px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 25px;
+        border-radius: 5px;
+        border: 1px solid #343434;
+
+        svg{
+            height: 14px;
         }
     }
 
