@@ -9,6 +9,7 @@
     left: calc(50% - 200px);
     top: 3rem;
     overflow: hidden;
+    z-index: 1000;
 
     &-badge{
         font-size: 9px;

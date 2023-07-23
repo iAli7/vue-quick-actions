@@ -12,7 +12,6 @@
     <QaBody
       :items="itemsToRender"
       :focused-item-index="focusedItemIndex"
-      @focus="focusedItemIndex = $event"
       @select="handleSelect($event)"
     />
     <QaFooter
@@ -125,6 +124,7 @@ const handleBack = () => {
 
 const handleKeyboard = (event: KeyboardEvent) => {
   if (event.ctrlKey && event.key === 'k') {
+    event.preventDefault();
     showQuickAction.value = true;
   }
 
@@ -141,6 +141,10 @@ const handleKeyboard = (event: KeyboardEvent) => {
 
     if (currentItem.onSelect) {
       handleSelect(currentItem);
+    }
+    if (!currentItem.children) {
+      showQuickAction.value = false;
+      activeParentPath.value = [];
     }
   } else if (event.key === 'Backspace') {
     handleBack();

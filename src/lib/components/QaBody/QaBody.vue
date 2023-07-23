@@ -3,7 +3,6 @@
     <QaList
       :items="itemsToRender"
       :focused-item-index="focusedItemIndex"
-      @focus="focusedItemIndex = $event"
       @select="handleSelect($event)"
     />
   </div>
