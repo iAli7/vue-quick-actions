@@ -1,7 +1,5 @@
-import VueQuickAction from './components/QaBox/QaBox.vue';
+import VueQuickActions from './components/QaBox/QaBox.vue';
 import { Item } from './types/types';
 
-export {
-  VueQuickAction,
-  Item,
-};
+export default VueQuickActions;
+export { Item };
