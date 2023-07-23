@@ -24,3 +24,8 @@ or if you are using yarn:
 ```bash
 yarn add vue-quick-actions
 ```
+
+## Documentation and GitHub
+
+[Documentation](https://vuequickactions.vercel.app)
+[GitHub](https://github.com/iAli7/vue-quick-actions.git)
