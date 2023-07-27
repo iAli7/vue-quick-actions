@@ -123,7 +123,7 @@ const handleBack = () => {
 };
 
 const handleKeyboard = (event: KeyboardEvent) => {
-  if (event.metaKey && event.key === 'k') {
+  if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
     event.preventDefault();
     showQuickAction.value = true;
   }
