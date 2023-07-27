@@ -15,10 +15,12 @@
             background: #a0a0a019;
             padding: 0;
         }
+}
 
-        &:first-child{
-            padding-top: 0;
-        }
+&-wrapper{
+    &:first-child .quick-action-list-separator{
+        padding-top: 0;
+    }
 }
 
     &-item {
@@ -51,7 +53,7 @@
         }
         &-title {
             font-size: 12px;
-            font-weight: 500;
+            font-weight: 400;
         }
 
         &-role{
