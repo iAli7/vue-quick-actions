@@ -132,6 +132,19 @@ const handleKeyboard = (event: KeyboardEvent) => {
 
   if (!itemsToRender.value) return;
 
+  if (Number(event.key)) {
+    const index = Number(event.key);
+    if (index < 0) return;
+    if (index >= itemsToRender.value.length || itemsToRender.value[index].separator) {
+      focusedItemIndex.value = itemsToRender.value.length - 1;
+      while (itemsToRender.value[focusedItemIndex.value].separator && focusedItemIndex.value > 0) {
+        focusedItemIndex.value -= 1;
+      }
+    } else {
+      focusedItemIndex.value = index;
+    }
+  }
+
   if (event.key === 'ArrowDown') {
     focusedItemIndex.value = navigate(1);
   } else if (event.key === 'ArrowUp') {
