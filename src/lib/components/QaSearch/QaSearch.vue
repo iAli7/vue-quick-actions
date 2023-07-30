@@ -49,7 +49,7 @@
 
 <script setup lang="ts">
 import {
-  ref, watch, defineProps, defineEmits, emit,
+  ref, watch, emit,
 } from 'vue';
 
 const emit = defineEmits({
