@@ -152,12 +152,17 @@ const handleKeyboard = (event: KeyboardEvent) => {
   } else if (event.key === 'Enter') {
     const currentItem = itemsToRender.value[focusedItemIndex.value];
 
-    if (currentItem.onSelect) {
-      handleSelect(currentItem);
-    }
-    if (!currentItem.children) {
-      showQuickAction.value = false;
-      activeParentPath.value = [];
+    if (currentItem.children) {
+      activeParentPath.value.push(currentItem);
+      focusedItemIndex.value = 1;
+    } else {
+      if (currentItem.onSelect) {
+        handleSelect(currentItem);
+      }
+      if (!currentItem.children) {
+        showQuickAction.value = false;
+        activeParentPath.value = [];
+      }
     }
   } else if (event.key === 'Backspace') {
     handleBack();

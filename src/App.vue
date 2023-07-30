@@ -50,7 +50,7 @@ const qaList: Item[] = [
   {
     label: 'Command',
     separator: true,
-    key: 'Pages-separator',
+    key: 'pages-separator',
   },
   {
     label: "Log 'hey' to console",
