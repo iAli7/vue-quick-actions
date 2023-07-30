@@ -1,7 +1,6 @@
 <template>
   <QaBox
     :items="qaList"
-    :loading="true"
     @search="handleSearch"
   />
 </template>
@@ -9,56 +8,54 @@
 <script setup lang="ts">
 // eslint-disable-next-line
 import QaBox from "./lib/components/QaBox/QaBox.vue"
-import { Item } from './lib/types/types';
 // eslint-disable-next-line
-import image from "./assets/logo.png"
+import home from "./assets/images/homeIcon.vue"
+// eslint-disable-next-line
+import store from "./assets/images/storeIcon.vue"
+// eslint-disable-next-line
+import support from "./assets/images/supportIcon.vue"
+import { Item } from './lib/types/types';
 
 const qaList: Item[] = [
   {
-    label: 'Figma',
+    label: 'Pages',
     separator: true,
-    key: 'figma-separator',
+    key: 'Pages-separator',
   },
   {
-    label: 'Figma',
-    alias: ['design'],
-    icon: image,
-    key: 'figma',
-    role: 'Group',
-    onSelect: () => {
-      console.log('test');
-    },
-
+    label: 'Home Page',
+    key: 'home-page',
+    icon: home,
+    role: 'Page',
+  },
+  {
+    label: 'Store',
+    key: 'store',
+    icon: store,
+    role: 'Page',
     children: [
       {
-        label: 'Figma Child 1',
-        key: 'figma-child',
-
-        onSelect: () => {
-          console.log('test child');
-        },
-        children: [
-          {
-            label: 'Figma Child 1 Child',
-            key: 'figma-child-child',
-          },
-        ],
+        label: 'Products',
+        key: 'products',
+        role: 'Page',
       },
     ],
   },
   {
-    label: 'AdobeXD',
-    separator: true,
-    key: 'adobexd-separator',
+    label: 'Support',
+    key: 'support',
+    icon: support,
+    role: 'Page',
   },
   {
-    label: 'AdobeXD',
-    alias: 'design',
-    key: 'adobexd',
-    role: 'Test',
-    onSelect: () => {
-      console.log('test');
-    },
+    label: 'Command',
+    separator: true,
+    key: 'Pages-separator',
+  },
+  {
+    label: "Log 'hey' to console",
+    key: 'write-command',
+    role: 'Command',
   },
 ];
 

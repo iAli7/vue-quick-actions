@@ -19,13 +19,14 @@
           v-if="item.icon"
           class="quick-action-list-item-icon"
         >
-          <img :src="item.icon">
-          <div v-if="typeof item.icon === 'string'" />
+          <div v-if="typeof item.icon === 'string'">
+            <img :src="item.icon">
+          </div>
           <div v-else>
             <component :is="item.icon" />
           </div>
         </div>
-        <div class="quick-action-list-item-title">
+        <div class="quick-action-list-item-label">
           {{ item.label }}
         </div>
       </div>
@@ -46,7 +47,10 @@ defineProps({
     type: Object as PropType<Item>,
     required: true,
   },
-  focused: Boolean,
+  focused: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits({

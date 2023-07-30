@@ -46,7 +46,7 @@ const props = defineProps<{
 }>();
 
 const searchValue = ref('');
-const focusedItemIndex = ref(0);
+const focusedItemIndex = ref(1);
 const showQuickAction = ref(false);
 const activeParentPath = ref<Item[]>([]);
 
@@ -65,7 +65,7 @@ const handleSelect = (item: Item) => {
 
   if (item.children) {
     activeParentPath.value.push(item);
-    focusedItemIndex.value = 0;
+    focusedItemIndex.value = 1;
   }
 
   item.onSelect?.();
@@ -114,12 +114,12 @@ const handleClickPath = (item: Item) => {
     activeParentPath.value = activeParentPath.value.slice(0, itemIndex + 1);
   }
 
-  focusedItemIndex.value = 0;
+  focusedItemIndex.value = 1;
 };
 
 const handleBack = () => {
   activeParentPath.value.pop();
-  focusedItemIndex.value = 0;
+  focusedItemIndex.value = 1;
 };
 
 const handleKeyboard = (event: KeyboardEvent) => {
